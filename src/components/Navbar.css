@@ -1,0 +1,65 @@
+.navbar {
+  position: sticky;   /* sayfa kayarken üstte yapışık kalır */
+  top: 0;
+  z-index: 20;
+
+  /* Cam efekti: arkadaki içeriği bulanıklaştır.
+     Bunun görünmesi için arka planın YARI SAYDAM olması şart —
+     tam opak bir renk verirsek bulanıklaştıracak bir şey kalmaz. */
+  background-color: var(--color-nav-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);   /* Safari */
+
+  border-bottom: 1px solid var(--color-border);
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+}
+
+.navbar__logo {
+  font-weight: 700;
+  font-size: 1.125rem;
+  letter-spacing: 0.5px;
+  color: var(--color-text);
+}
+
+.navbar__logo:hover {
+  text-decoration: none;
+  color: var(--color-accent);
+}
+
+.navbar__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.navbar__links {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.navbar__link {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.navbar__link:hover {
+  text-decoration: none;
+  color: var(--color-accent);
+}
+
+/* Dar ekranda menü linklerini gizleyip sadece logo + dil düğmesi
+   bırakıyoruz. Mobil için açılır menü ayrı bir iş; şimdilik
+   kullanıcı sayfayı kaydırarak geziyor. */
+@media (max-width: 640px) {
+  .navbar__links {
+    display: none;
+  }
+}

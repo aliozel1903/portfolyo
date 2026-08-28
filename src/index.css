@@ -1,0 +1,191 @@
+/* ============================================================
+   index.css — Sitenin görsel zemini.
+   Buraya SADECE tüm sayfada geçerli olan şeyler yazılır:
+   renkler, tipografi, reset ve tekrar eden kalıplar.
+   Bir bölüme özel stil buraya değil, o bölümün kendi dosyasına gider.
+   ============================================================ */
+
+/* --- 1. Tasarım değişkenleri (design tokens) ---------------
+   Rengi tek yerden yönetmek için. Sonradan "mavi biraz koyu olsun"
+   dediğinizde 40 yeri değil, aşağıdaki tek satırı değiştireceğiz. */
+:root {
+  /* Renkler — AÇIK TEMA (varsayılan değerler).
+     Karanlık tema aşağıda aynı isimlere yeni değer veriyor;
+     bileşen dosyalarında tek bir renk kodu yok. */
+  --color-bg: #ffffff;
+  --color-surface: #f8f9fa;      /* gri şeritler, rozet zeminleri */
+  --color-card: #ffffff;         /* proje kartlarının zemini */
+  --color-border: #e2e5e9;
+  --color-text: #1c1e21;         /* başlıklar, ana metin */
+  --color-text-muted: #5b6470;   /* tarih, açıklama, ikincil metin */
+  --color-accent: #0a66c2;       /* linkler ve vurgular */
+  --color-accent-hover: #084d94; /* vurgunun hover tonu */
+  --color-on-accent: #ffffff;    /* mavi zemin üzerindeki yazı */
+  --color-accent-glow: rgba(10, 102, 194, 0.15);  /* hover gölgesi */
+  --color-nav-bg: rgba(255, 255, 255, 0.72);      /* cam efektli menü */
+
+  /* Ölçek — boşlukları göz kararı değil, sabit bir merdivenden seçeriz */
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1.25rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+
+  --radius: 8px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+
+  /* Sayfanın en geniş hali. Metin satırları çok uzayınca okunmaz olur. */
+  --container-width: 900px;
+
+  font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- 2. Reset ----------------------------------------------
+   Tarayıcıların hazır gelen boşluklarını sıfırlıyoruz ki
+   ölçüler bizim kontrolümüzde olsun. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;   /* padding genişliği şişirmesin */
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Menü linkleri #projects'e atlarken sert zıplamasın, yumuşak kaysın */
+html {
+  scroll-behavior: smooth;
+}
+
+/* --- 3. Tipografi ------------------------------------------ */
+h1, h2, h3 {
+  line-height: 1.25;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+h1 { font-size: 2.5rem; letter-spacing: -0.5px; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.125rem; }
+
+@media (max-width: 640px) {
+  h1 { font-size: 2rem; }
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+  text-decoration: underline;
+}
+
+ul {
+  list-style: none;   /* rozet/madde listelerini kendimiz biçimlendireceğiz */
+}
+
+/* Klavyeyle gezenler için görünür odak halkası — erişilebilirlik şart */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* --- 4. Düzen (layout) kalıpları ---------------------------
+   Her bölüm bu ikisini kullanacak: dışta .section, içte .container */
+
+/* .section: dikey nefes payı. Bölümler arasındaki ritmi bu belirler. */
+.section {
+  padding: var(--space-xl) var(--space-md);
+}
+
+/* Bir bölümü gri zeminle ayırmak istersek: <section className="section section--alt"> */
+.section--alt {
+  background-color: var(--color-surface);
+  border-block: 1px solid var(--color-border);
+}
+
+/* .container: içeriği ortalar ve genişliğini sınırlar. */
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin-inline: auto;
+}
+
+/* Bölüm başlıklarının altındaki ince çizgi — sayfaya düzen hissi verir */
+.section-title {
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Sticky navbar, #projects gibi bir linke atlandığında bölüm
+   başlığını örtmesin diye kayma hedefine üstten pay bırakıyoruz. */
+.section {
+  scroll-margin-top: 64px;
+}
+
+/* ============================================================
+   KARANLIK TEMA
+   <html data-theme="dark"> olduğunda SADECE renk değişkenleri
+   yeniden tanımlanır. Tek bir bileşen dosyasına dokunulmuyor.
+   ============================================================ */
+:root[data-theme="dark"] {
+  --color-bg: #0f172a;           /* slate-900: derinliği olan koyu zemin */
+  --color-surface: #1e293b;      /* şeritler bir ton açık */
+  /* Koyu temada kart, sayfa zemininden bir ton AÇIK olmalı;
+     aksi halde sadece çerçeveyle ayrışır ve düz görünür. */
+  --color-card: #1a2537;
+  --color-border: #334155;
+  --color-text: #e2e8f0;         /* saf beyaz değil — göz yormasın */
+  --color-text-muted: #94a3b8;
+  --color-accent: #4d9fff;       /* koyu zeminde okunan açık mavi */
+  --color-accent-hover: #7cb8ff; /* koyuda hover DAHA AÇIK olmalı */
+  --color-on-accent: #0f172a;    /* açık mavi zemine koyu yazı */
+  --color-accent-glow: rgba(77, 159, 255, 0.22);
+  --color-nav-bg: rgba(15, 23, 42, 0.72);
+
+  /* Tarayıcının kendi arayüzü de (kaydırma çubuğu, form
+     elemanları, seçim rengi) koyu moda geçsin. */
+  color-scheme: dark;
+}
+
+/* Tema değişirken sert geçiş olmasın. Sadece renk özellikleri;
+   "all" yazmak sayfadaki her animasyonu etkilerdi. */
+body,
+.navbar,
+.card,
+.statusbar,
+.skills__badge,
+.theme-toggle,
+.lang-switch {
+  transition: background-color 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body,
+  .navbar,
+  .card,
+  .statusbar,
+  .skills__badge,
+  .theme-toggle,
+  .lang-switch {
+    transition: none;
+  }
+}

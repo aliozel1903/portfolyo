@@ -1,0 +1,61 @@
+/* Kod editörü durum çubuğu: ince, monospace, sakin. */
+.statusbar {
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+
+  /* Monospace: durum çubuğu hissinin asıl kaynağı. */
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.statusbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: 10px var(--space-md);
+}
+
+.statusbar__left,
+.statusbar__center {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.statusbar__time {
+  font-variant-numeric: tabular-nums;  /* rakamlar eşit genişlikte,
+                                          saat değişince satır oynamaz */
+}
+
+.statusbar__icon {
+  display: inline-flex;
+  padding: 4px;
+  border-radius: 4px;
+  color: var(--color-text-muted);
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.statusbar__icon:hover {
+  color: var(--color-accent);
+  background-color: var(--color-bg);
+}
+
+/* Linki henüz hazır olmayan ikon */
+.statusbar__icon.is-disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.statusbar__icon.is-disabled:hover {
+  color: var(--color-text-muted);
+  background-color: transparent;
+}
+
+/* Dar ekranda telifi gizle; saat ve ikonlar kalsın. */
+@media (max-width: 560px) {
+  .statusbar__right {
+    display: none;
+  }
+}

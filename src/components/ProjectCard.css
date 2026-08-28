@@ -1,0 +1,93 @@
+.card {
+  /* Kartın kendisi de dikey bir flex kutusu.
+     Amaç: linkler bloğunu en alta itebilmek. */
+  display: flex;
+  flex-direction: column;
+  height: 100%;              /* ızgaradaki tüm kartlar eşit yükseklikte */
+
+  padding: var(--space-md);
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-accent);
+  box-shadow: 0 6px 18px var(--color-accent-glow);
+}
+
+.card__title {
+  margin-bottom: var(--space-xs);
+}
+
+.card__description {
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+}
+
+/* --- Teknoloji rozetleri: Skills'tekinin küçültülmüş hali --- */
+.card__tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: var(--space-md);
+}
+
+.card__tech-item {
+  padding: 3px 10px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+}
+
+/* --- Alt linkler --- */
+.card__links {
+  display: flex;
+  gap: var(--space-xs);
+  /* auto: yukarıdaki boşluğu sonuna kadar büyüt = bloğu dibe yapıştır */
+  margin-top: auto;
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-border);
+}
+
+.card__link {
+  padding: 6px 14px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.card__link:hover {
+  text-decoration: none;
+  border-color: var(--color-accent);
+  background-color: var(--color-surface);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* Linki henüz hazır olmayan buton: soluk ve tıklanamaz.
+   (Etiket <span> olduğu için tıklama zaten mümkün değil;
+   buradaki kurallar durumu GÖRSEL olarak anlatıyor.) */
+.card__link.is-disabled {
+  color: var(--color-text-muted);
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: var(--color-surface);
+}
+
+.card__link.is-disabled:hover {
+  border-color: var(--color-border);   /* hover'da canlanmasın */
+}

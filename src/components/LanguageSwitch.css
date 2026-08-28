@@ -1,0 +1,33 @@
+/* Navbar'ın içinde akışa dahil duruyor (artık position: fixed değil) */
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 5px 12px;
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+
+  color: var(--color-text-muted);
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;      /* tam yuvarlak uçlar */
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.lang-switch:hover {
+  border-color: var(--color-accent);
+}
+
+/* Seçili dil koyu ve belirgin, diğeri soluk */
+.lang-switch .is-active {
+  color: var(--color-accent);
+}
+
+.lang-switch__divider {
+  color: var(--color-border);
+  font-weight: 400;
+}

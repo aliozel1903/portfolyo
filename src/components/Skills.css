@@ -1,0 +1,44 @@
+/* Rozetler yan yana dizilir, sığmayınca alt satıra iner. */
+.skills__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.skills__badge {
+  padding: 8px 18px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+
+  /* Hangi özelliklerin yumuşak geçeceğini tek tek yazıyoruz.
+     "transition: all" yazmak tarayıcıyı gereksiz yere yorar. */
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    color 0.18s ease;
+}
+
+/* Üzerine gelince: hafifçe yükselir, kenarı ve yazısı maviye döner. */
+.skills__badge:hover {
+  transform: translateY(-3px);
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  box-shadow: 0 4px 12px var(--color-accent-glow);
+}
+
+/* Hareketi rahatsız edici bulan kullanıcılar için (işletim sistemi
+   ayarından "hareketi azalt" seçenler): renk değişsin, zıplama olmasın. */
+@media (prefers-reduced-motion: reduce) {
+  .skills__badge {
+    transition: border-color 0.18s ease, color 0.18s ease;
+  }
+  .skills__badge:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
