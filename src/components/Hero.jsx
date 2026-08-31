@@ -31,16 +31,19 @@ function Hero() {
           <div className="hero__actions" id="contact">
             {/* SmartLink: linki "#" ise tıklanamaz <span> basar */}
             <SmartLink className="btn btn--fire" href={profile.github}>
+              {/* Alevler butonun ARKASINDA duruyor ve kenarlarından
+                 taşarak yükseliyor; içeride hiçbir şey oynamıyor. */}
               <span className="btn__flames" aria-hidden="true">
-                {/* üç ayrı alev dili, farklı gecikmelerle titriyor */}
-                <i /><i /><i /><i /><i />
+                <i /><i /><i /><i /><i /><i /><i /><i /><i />
               </span>
               <span className="btn__label">{t.hero.github}</span>
             </SmartLink>
 
             <SmartLink className="btn btn--spark" href={profile.linkedin}>
-              {/* kenarda dolaşan kıvılcım */}
+              {/* Kıvılcım yalnızca çerçevede dolaşır; iki hüzme
+                 birbirinin tersine dönerek elektrik hissini güçlendirir. */}
               <span className="btn__arc" aria-hidden="true" />
+              <span className="btn__arc btn__arc--2" aria-hidden="true" />
               <span className="btn__label">{t.hero.linkedin}</span>
             </SmartLink>
 

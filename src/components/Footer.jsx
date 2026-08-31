@@ -1,18 +1,12 @@
 /* Footer.jsx — Kod editörü durum çubuğu (status bar) görünümlü alt çubuk.
 
-   Üç bölge: solda kaçan ördek, ortada canlı saat + konum,
-   sağda sosyal ikonlar ve telif. */
+   Üç bölge: solda bağlantı ikonları, ortada canlı saat + konum,
+   sağda sürüm bilgisi. */
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { profile } from "../data/content";
 import { useLanguage } from "../context/LanguageContext";
-import {
-  ClockIcon,
-  DuckIcon,
-  GithubIcon,
-  LinkedinIcon,
-  MailIcon,
-} from "./icons";
+import { ClockIcon, GithubIcon, LinkedinIcon, MailIcon } from "./icons";
 import SmartLink from "./SmartLink";
 import "./Footer.css";
 
@@ -23,17 +17,6 @@ function Footer() {
     <footer className="statusbar">
       <div className="statusbar__inner container">
         <div className="statusbar__left">
-          <RunawayDuck label={t.footer.duck} />
-        </div>
-
-        <div className="statusbar__center">
-          <ClockIcon />
-          <LiveClock />
-          <span className="statusbar__sep" aria-hidden="true">•</span>
-          <span>{t.footer.location}</span>
-        </div>
-
-        <div className="statusbar__right">
           {/* İkonların içinde yazı yok; ekran okuyucu ne olduklarını
              aria-label'dan öğreniyor. */}
           <SmartLink
@@ -62,19 +45,29 @@ function Footer() {
           >
             <MailIcon />
           </SmartLink>
-          <span className="statusbar__copy">© 2026 Ali Özel | build: 1.1.0</span>
         </div>
+
+        <div className="statusbar__center">
+          <ClockIcon />
+          <LiveClock />
+          <span className="statusbar__sep" aria-hidden="true">•</span>
+          <span>{t.footer.location}</span>
+        </div>
+
+        <div className="statusbar__right">© 2026 Ali Özel | build: 1.1.0</div>
       </div>
     </footer>
   );
 }
 
-/* Saniyesi saniyesine güncellenen canlı saat. */
+/* Canlı yerel saat (saat:dakika). */
 function LiveClock() {
   const [time, setTime] = useState(formatTime);
 
   useEffect(() => {
-    const timer = setInterval(() => setTime(formatTime()), 1000);
+    // Saniye göstermiyoruz; dakika değişimini kaçırmamak için
+    // 15 saniyede bir kontrol yeterli.
+    const timer = setInterval(() => setTime(formatTime()), 15000);
     // TEMİZLİK: component ekrandan kalkarsa sayacı durdur.
     // Bu satır olmazsa sayaç arka planda çalışmaya devam eder
     // ve var olmayan bir component'i güncellemeye çalışır.
@@ -88,52 +81,7 @@ function formatTime() {
   return new Date().toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
-    second: "2-digit",
   });
 }
-
-/* --- Kaçan ördek ---
-   İmleç yaklaşınca ekranın rastgele bir köşesine sıçrar.
-   Konumu transform ile değiştiriyoruz: transform layout'u
-   yeniden hesaplatmaz, sadece çizim katmanını kaydırır —
-   bu yüzden hareket takılmadan akar. */
-function RunawayDuck({ label }) {
-  const [spot, setSpot] = useState(null);   // null = evinde
-  const lastSpot = useRef(-1);
-
-  const escape = () => {
-    // Aynı köşeye üst üste gitmesin
-    let next = Math.floor(Math.random() * CORNERS.length);
-    if (next === lastSpot.current) next = (next + 1) % CORNERS.length;
-    lastSpot.current = next;
-    setSpot(CORNERS[next]);
-  };
-
-  return (
-    <button
-      type="button"
-      className={`duck${spot ? " duck--loose" : ""}`}
-      style={spot ? { top: spot.top, left: spot.left, transform: spot.shift } : undefined}
-      onMouseEnter={escape}
-      onFocus={escape}
-      onClick={escape}
-      aria-label={label}
-      title={label}
-    >
-      <DuckIcon />
-    </button>
-  );
-}
-
-/* Ekranın dört köşesi + kenar ortaları. shift, ördeği köşenin
-   içine doğru itip ekran dışına taşmasını engelliyor. */
-const CORNERS = [
-  { top: "12%", left: "6%", shift: "translate(0, 0)" },
-  { top: "12%", left: "94%", shift: "translate(-100%, 0)" },
-  { top: "82%", left: "6%", shift: "translate(0, -100%)" },
-  { top: "82%", left: "94%", shift: "translate(-100%, -100%)" },
-  { top: "48%", left: "92%", shift: "translate(-100%, -50%)" },
-  { top: "20%", left: "50%", shift: "translate(-50%, 0)" },
-];
 
 export default Footer;

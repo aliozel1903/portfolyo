@@ -17,17 +17,23 @@
   padding: 10px var(--space-md);
 }
 
-.statusbar__left {
-  display: flex;
-  align-items: center;
-  min-width: 28px;      /* ördek kaçınca yer boş kalsın, düzen oynamasın */
-}
-
+/* Üç bölge eşit paylaşılır: böylece ortadaki saat, yanlardaki
+   içerik ne kadar uzun olursa olsun tam ortada kalır. */
+.statusbar__left,
 .statusbar__center,
 .statusbar__right {
   display: flex;
   align-items: center;
   gap: var(--space-xs);
+  flex: 1 1 0;
+}
+
+.statusbar__center {
+  justify-content: center;
+}
+
+.statusbar__right {
+  justify-content: flex-end;
 }
 
 .statusbar__time {
@@ -38,10 +44,6 @@
 
 .statusbar__sep {
   opacity: 0.5;
-}
-
-.statusbar__copy {
-  margin-left: var(--space-xs);
 }
 
 .statusbar__icon {
@@ -68,37 +70,9 @@
   background-color: transparent;
 }
 
-/* --- Kaçan ördek --- */
-.duck {
-  display: inline-flex;
-  padding: 4px;
-  color: var(--color-text-muted);
-  background: none;
-  border: 0;
-  border-radius: 4px;
-  cursor: pointer;
-  /* Sıçrama hızlı ama sert değil: kısa süre + yay eğrisi */
-  transition: top 0.28s cubic-bezier(0.22, 1.2, 0.36, 1),
-    left 0.28s cubic-bezier(0.22, 1.2, 0.36, 1), color 0.15s ease;
-}
-
-.duck:hover {
-  color: var(--color-accent);
-}
-
-/* Kaçtığı andan itibaren sayfadan bağımsız, ekrana sabit */
-.duck--loose {
-  position: fixed;
-  z-index: 50;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .duck { transition: color 0.15s ease; }
-}
-
-/* Dar ekranda telifi gizle; saat, konum ve ikonlar kalsın. */
+/* Dar ekranda sürüm bilgisini gizle; saat, konum ve ikonlar kalsın. */
 @media (max-width: 560px) {
-  .statusbar__copy {
+  .statusbar__right {
     display: none;
   }
 }

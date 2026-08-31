@@ -152,7 +152,6 @@ export const ui = {
     },
     footer: {
       location: "Bursa, Türkiye",
-      duck: "Yakalayabilirsen yakala",
     },
     projects: {
       github: "GitHub",
@@ -201,7 +200,6 @@ export const ui = {
     },
     footer: {
       location: "Bursa, Türkiye",
-      duck: "Catch me if you can",
     },
     projects: {
       github: "GitHub",

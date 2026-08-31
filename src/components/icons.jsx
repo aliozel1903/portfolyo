@@ -126,13 +126,3 @@ export function EnvelopeIcon() {
     </svg>
   );
 }
-
-/* Ördek — footer'ın sol köşesinde kaçan minik figür. */
-export function DuckIcon() {
-  return (
-    <svg {...base} width={16} height={16} viewBox="0 0 24 24" fill="currentColor" stroke="none">
-      <path d="M14 4a3.2 3.2 0 0 1 3.2 3.2c0 .4-.07.78-.2 1.13l2.4.67-2.1 1.5c-.5 3.6-3.6 6.5-7.3 6.5H4c0-2.3 1.3-4.3 3.2-5.3-.6-.7-1-1.6-1-2.6C6.2 6.7 8.5 4.4 11.3 4.4c.5 0 1 .07 1.4.2.4-.4.8-.6 1.3-.6zm.9 2.2a.7.7 0 1 0 0 1.4.7.7 0 0 0 0-1.4z" />
-      <path d="M4 17h6.5c.6 0 1.2.3 1.5.8l.7 1.2H6.8A2.8 2.8 0 0 1 4 17z" opacity="0.6" />
-    </svg>
-  );
-}

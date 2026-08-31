@@ -99,7 +99,6 @@
   font-weight: 600;
   border-radius: 999px;
   border: 1px solid transparent;
-  overflow: hidden;             /* efektler butonun dışına taşmasın */
   isolation: isolate;           /* katman sırası bu kutuyla sınırlı */
   transition: background-color 0.15s ease, border-color 0.15s ease,
     color 0.15s ease;
@@ -145,59 +144,84 @@
 
 /* ============================================================
    1) ATEŞLİ GITHUB
-   Beş alev dili butonun altından yükselir; her biri farklı
-   gecikme ve süreyle titrediği için hareket düzensiz görünür.
+   Alevler butonun İÇİNDE değil, ARKASINDA. Buton yüzeyi ::before
+   ile ayrı bir katman olarak çiziliyor (z-index 1); alev dilleri
+   onun altında (z-index 0) kalıp kenarlardan dışarı taşıyor.
    ============================================================ */
 .btn--fire {
+  background-color: transparent;
+  border-color: transparent;
   color: var(--color-text);
+  overflow: visible;            /* alevler dışarı çıkabilsin */
+}
+
+/* Butonun görünen yüzeyi — alevleri örten katman */
+.btn--fire::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
   background-color: var(--color-surface);
-  border-color: var(--color-border);
+  border: 1px solid var(--color-border);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  z-index: 1;
 }
 
 .btn--fire:hover {
-  color: #fff5e6;
-  border-color: #ff8a3d;
+  color: #fff3e0;
 }
 
+.btn--fire:hover::before {
+  border-color: #ff8a3d;
+  background-color: #1a1005;
+}
+
+/* Alev yatağı: butondan her yöne taşan kutu */
 .btn__flames {
   position: absolute;
-  inset: auto 0 -6px 0;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 6px;
+  inset: -16px -14px -20px -14px;
+  z-index: 0;                   /* ::before yüzeyinin ALTINDA */
   opacity: 0;
   transition: opacity 0.2s ease;
-  z-index: 1;
+  pointer-events: none;
+  /* Sıcak bir hâle: alevlerin tabanını birbirine bağlar */
+  filter: blur(6px) saturate(1.3);
 }
 
 .btn--fire:hover .btn__flames {
   opacity: 1;
 }
 
+/* Dokuz alev dili: dördü altta, ikisi solda, ikisi sağda, biri üstte.
+   Hepsi tabanından yukarı doğru uzayıp söner. */
 .btn__flames i {
-  display: block;
-  width: 16px;
-  height: 12px;
-  border-radius: 50% 50% 40% 40%;
-  /* Alev rengi: dipte sarı, tepede kırmızı */
-  background: radial-gradient(circle at 50% 85%, #ffd54a 0%, #ff9a1f 45%, #ff4d1f 80%);
-  filter: blur(3px);
+  position: absolute;
+  bottom: 8px;
+  width: 26px;
+  height: 30px;
+  border-radius: 50% 50% 45% 45%;
+  background: radial-gradient(circle at 50% 90%, #ffe066 0%, #ffa41f 40%, #ff4d1f 72%, rgba(255, 77, 31, 0) 100%);
   transform-origin: 50% 100%;
-  animation: flame-flicker 900ms ease-in-out infinite;
+  animation: flame-lick 900ms ease-in-out infinite;
 }
 
-.btn__flames i:nth-child(1) { animation-delay: 0ms;   animation-duration: 780ms; }
-.btn__flames i:nth-child(2) { animation-delay: 120ms; animation-duration: 950ms; }
-.btn__flames i:nth-child(3) { animation-delay: 60ms;  animation-duration: 680ms; }
-.btn__flames i:nth-child(4) { animation-delay: 200ms; animation-duration: 880ms; }
-.btn__flames i:nth-child(5) { animation-delay: 40ms;  animation-duration: 1020ms; }
+/* Alt kenar boyunca */
+.btn__flames i:nth-child(1) { left: 6%;  animation-delay: 0ms;   animation-duration: 760ms; }
+.btn__flames i:nth-child(2) { left: 24%; animation-delay: 140ms; animation-duration: 960ms; }
+.btn__flames i:nth-child(3) { left: 44%; animation-delay: 60ms;  animation-duration: 700ms; }
+.btn__flames i:nth-child(4) { left: 64%; animation-delay: 210ms; animation-duration: 880ms; }
+.btn__flames i:nth-child(5) { left: 80%; animation-delay: 90ms;  animation-duration: 1020ms; }
 
-@keyframes flame-flicker {
-  0%, 100% { transform: scaleY(1) translateY(0); opacity: 0.85; }
-  40%      { transform: scaleY(2.4) translateY(-6px); opacity: 1; }
-  70%      { transform: scaleY(1.7) translateY(-2px); opacity: 0.9; }
+/* Yan kenarlardan yükselenler — daha ince ve uzun */
+.btn__flames i:nth-child(6) { left: 0;   bottom: 18px; width: 20px; height: 38px; animation-delay: 40ms;  animation-duration: 840ms; }
+.btn__flames i:nth-child(7) { right: 0;  bottom: 18px; width: 20px; height: 38px; animation-delay: 260ms; animation-duration: 920ms; }
+.btn__flames i:nth-child(8) { left: 12%; bottom: 26px; width: 18px; height: 34px; animation-delay: 320ms; animation-duration: 780ms; }
+.btn__flames i:nth-child(9) { right: 14%; bottom: 26px; width: 18px; height: 34px; animation-delay: 180ms; animation-duration: 1000ms; }
+
+@keyframes flame-lick {
+  0%, 100% { transform: scaleY(0.75) scaleX(1) translateY(4px); opacity: 0.75; }
+  35%      { transform: scaleY(1.55) scaleX(0.86) translateY(-10px); opacity: 1; }
+  65%      { transform: scaleY(1.15) scaleX(1.06) translateY(-4px); opacity: 0.9; }
 }
 
 /* ============================================================
@@ -209,31 +233,38 @@
   color: var(--color-accent);
   background-color: var(--color-surface);
   border-color: var(--color-border);
+  overflow: visible;
 }
 
 .btn--spark:hover {
-  border-color: transparent;
-  box-shadow: 0 0 18px var(--color-accent-glow);
+  border-color: rgba(77, 159, 255, 0.35);
+  box-shadow: 0 0 22px rgba(77, 159, 255, 0.28);
 }
 
+/* Hüzme, butonun tam çerçevesinde döner.
+   Nasıl: dönen bir conic-gradient halkanın ORTASI maskeyle
+   boşaltılıyor (mask-composite: exclude), geriye yalnızca 2px'lik
+   kenar şeridi kalıyor. Böylece ışık butonun içine hiç girmiyor. */
 .btn__arc {
   position: absolute;
   inset: -2px;
   border-radius: inherit;
+  padding: 2px;
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.18s ease;
   z-index: 0;
+  pointer-events: none;
 
   background: conic-gradient(
     from 0deg,
     transparent 0deg,
-    transparent 250deg,
-    #7cc4ff 300deg,
-    #ffffff 330deg,
-    #4d9fff 350deg,
+    transparent 288deg,
+    rgba(124, 196, 255, 0.75) 318deg,
+    #ffffff 340deg,
+    #4d9fff 352deg,
     transparent 360deg
   );
-  /* Ortayı boşalt: yalnızca 2px'lik çerçeve görünsün */
+
   mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
@@ -242,9 +273,16 @@
     linear-gradient(#000 0 0);
   mask-composite: exclude;
   -webkit-mask-composite: xor;
-  padding: 2px;
 
-  animation: spark-run 1.6s linear infinite;
+  /* Hüzmenin kendi parıltısı */
+  filter: drop-shadow(0 0 5px rgba(124, 196, 255, 0.9));
+  animation: spark-run 1.15s linear infinite;
+}
+
+/* İkinci hüzme: yarım tur ötede ve ters yönde */
+.btn__arc--2 {
+  animation: spark-run-back 1.6s linear infinite;
+  filter: drop-shadow(0 0 4px rgba(77, 159, 255, 0.8));
 }
 
 .btn--spark:hover .btn__arc {
@@ -253,6 +291,11 @@
 
 @keyframes spark-run {
   to { transform: rotate(360deg); }
+}
+
+@keyframes spark-run-back {
+  from { transform: rotate(180deg); }
+  to   { transform: rotate(-180deg); }
 }
 
 /* ============================================================

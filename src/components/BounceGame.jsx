@@ -12,7 +12,7 @@ import { profile } from "../data/content";
 import { useLanguage } from "../context/LanguageContext";
 import "./BounceGame.css";
 
-const SPEED = 380;           // px/sn — sabit, oyun boyunca değişmez
+const SPEED = 570;           // px/sn — sabit (1.5 kat hızlandırıldı)
 const BALL_R = 30;
 const PADDLE_W = 96;
 const PADDLE_H = 16;
@@ -37,6 +37,9 @@ function BounceGame({ onClose }) {
   // gereksiz yere yorardı. Konumu doğrudan transform ile yazıyoruz.
   const world = useRef({ x: 0, y: 0, vx: 0, vy: 0, paddleX: 0, w: 0, h: 0 });
   const scoreRef = useRef(0);
+  // playing state'inin ref kopyası: olay işleyicileri her render'da
+  // yeniden bağlanmadan güncel değeri okuyabilsin.
+  const playingRef = useRef(true);
 
   /* Konumları DOM'a yaz (React render'ı beklemeden) */
   const draw = () => {
@@ -74,6 +77,9 @@ function BounceGame({ onClose }) {
   }, []);
 
   const movePointer = useCallback((clientX) => {
+    // Oyun bittiyse raket fareyi takip etmesin; imleç serbest kalsın
+    // ki "Tekrar oyna" ve kapatma butonlarına rahatça tıklanabilsin.
+    if (!playingRef.current) return;
     const area = areaRef.current;
     if (!area) return;
     const box = area.getBoundingClientRect();
@@ -84,6 +90,10 @@ function BounceGame({ onClose }) {
     );
     draw();
   }, []);
+
+  useEffect(() => {
+    playingRef.current = playing;
+  }, [playing]);
 
   /* --- Oyun döngüsü --- */
   useEffect(() => {
@@ -206,7 +216,7 @@ function BounceGame({ onClose }) {
         </header>
 
         <div
-          className="bgame__area"
+          className={`bgame__area${playing ? " is-playing" : ""}`}
           ref={areaRef}
           onMouseMove={(e) => movePointer(e.clientX)}
           onTouchMove={(e) => movePointer(e.touches[0].clientX)}

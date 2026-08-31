@@ -62,7 +62,9 @@
   position: relative;
   height: 460px;
   overflow: hidden;
-  cursor: none;              /* imleç yerine raketi görüyoruz */
+  /* İmleç görünür kalır: oyuncu nereye geldiğini ve oyun bitince
+     hangi butona tıkladığını görsün. */
+  cursor: crosshair;
   touch-action: none;        /* parmakla oynarken sayfa kaymasın */
   user-select: none;
   background:
@@ -136,6 +138,11 @@
 }
 
 /* Başlangıç ve oyun sonu ekranı */
+/* Oyun bittiğinde alan normal imlece döner */
+.bgame__area:not(.is-playing) {
+  cursor: default;
+}
+
 .bgame__overlay {
   position: absolute;
   inset: 0;
