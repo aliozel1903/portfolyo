@@ -1,5 +1,6 @@
 .avatar {
   position: relative;
+  -webkit-tap-highlight-color: transparent;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -30,6 +31,14 @@
   height: 100%;
   object-fit: cover;   /* oranı bozmadan kırpar */
   display: block;
+
+  /* Kaydetmeyi zorlaştıran katman: seçilemez, sürüklenemez ve
+     fare olaylarını almaz (sağ tık butona gider, resme değil). */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;   /* iOS'ta uzun basınca menü çıkmasın */
+  pointer-events: none;
 }
 
 .avatar__fallback {

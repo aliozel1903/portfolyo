@@ -66,6 +66,20 @@
   scroll-margin-top: 90px;  /* menüden buraya kayınca üstte pay kalsın */
 }
 
+/* Işınlanma sonrası butonların etrafında kısa bir vurgu dalgası:
+   kullanıcı nereye geldiğini görsün. Animasyon bitince sınıf
+   kalsa da tekrar oynatmak için JS sınıfı yeniden ekliyor. */
+.hero__actions.is-teleported {
+  animation: teleport-flash 0.9s ease-out;
+  border-radius: 999px;
+}
+
+@keyframes teleport-flash {
+  0%   { box-shadow: 0 0 0 0 var(--color-accent-glow); }
+  40%  { box-shadow: 0 0 0 14px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
 @media (max-width: 640px) {
   .hero__inner {
     flex-direction: column;

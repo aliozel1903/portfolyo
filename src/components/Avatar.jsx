@@ -17,6 +17,10 @@ function Avatar({ onOpen }) {
       type="button"
       className="avatar"
       onClick={onOpen}
+      /* Sağ tık menüsünü butonun tamamında kapatıyoruz: resim
+         pointer-events:none olduğu için tıklama hedefi burasıdır. */
+      onContextMenu={(e) => e.preventDefault()}
+      onDragStart={(e) => e.preventDefault()}
       /* Tooltip görsel; ekran okuyucu için asıl açıklama burada */
       aria-label={t.hero.avatarTooltip}
     >
@@ -36,6 +40,11 @@ function Avatar({ onOpen }) {
             alt={t.hero.avatarAlt}
             className="avatar__img"
             onError={() => setFailed(true)}
+            /* Fotoğrafın kolayca indirilmesini zorlaştırıyoruz:
+               sürükle-bırak ve sağ tık menüsü kapalı. */
+            draggable={false}
+            onDragStart={(e) => e.preventDefault()}
+            onContextMenu={(e) => e.preventDefault()}
           />
         )}
       </span>

@@ -6,7 +6,7 @@ import { profile } from "../data/content";
 import { useLanguage } from "../context/LanguageContext";
 import SmartLink from "./SmartLink";
 import Avatar from "./Avatar";
-import CatchGame from "./CatchGame";
+import BounceGame from "./BounceGame";
 import { EnvelopeIcon } from "./icons";
 import "./Hero.css";
 
@@ -61,7 +61,7 @@ function Hero() {
 
       {/* Oyun yalnızca açıkken DOM'a giriyor; kapanınca tamamen
          kaldırılıyor, arkada çalışan döngü kalmıyor. */}
-      {gameOpen && <CatchGame onClose={() => setGameOpen(false)} />}
+      {gameOpen && <BounceGame onClose={() => setGameOpen(false)} />}
     </section>
   );
 }

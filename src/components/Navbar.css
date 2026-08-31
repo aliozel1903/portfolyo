@@ -31,15 +31,16 @@
   color: var(--color-text);
 }
 
-/* Marka işareti hover'da vurgu rengine döner */
-.navbar__logo .logo-mark {
-  color: var(--color-accent);
-  flex: none;
-  transition: transform 0.2s ease;
+/* Kartal işareti — hover'da hafifçe süzülür */
+.navbar__eagle {
+  font-size: 1.25rem;
+  line-height: 1;
+  display: inline-block;
+  transition: transform 0.25s ease;
 }
 
-.navbar__logo:hover .logo-mark {
-  transform: translateY(-1px);
+.navbar__logo:hover .navbar__eagle {
+  transform: translateY(-2px) rotate(-6deg);
 }
 
 /* ".dev" uzantısı bir ton soluk — isim öne çıksın */

@@ -6,7 +6,6 @@
 import { useLanguage } from "../context/LanguageContext";
 import LanguageSwitch from "./LanguageSwitch";
 import ThemeToggle from "./ThemeToggle";
-import { LogoMark } from "./icons";
 import "./Navbar.css";
 
 function Navbar() {
@@ -19,15 +18,16 @@ function Navbar() {
     { href: "#skills", label: t.sections.skills },
     { href: "#projects", label: t.sections.projects },
     { href: "#experience", label: t.sections.experience },
-    { href: "#contact", label: t.sections.contact },
+    // İletişim: kaydırmadan, tek adımda en tepeye ışınlanır
+    { href: "#contact", label: t.sections.contact, teleport: true },
   ];
 
   return (
     <header className="navbar">
       <div className="navbar__inner container">
         {/* Logo: en üste dönüş */}
-        <a href="#hero" className="navbar__logo">
-          <LogoMark />
+        <a href="#hero" className="navbar__logo" onClick={teleportTop}>
+          <span className="navbar__eagle" aria-hidden="true">🦅</span>
           <span className="navbar__brand">aliozel.dev</span>
         </a>
 
@@ -36,7 +36,11 @@ function Navbar() {
           <ul className="navbar__links">
             {links.map((link) => (
               <li key={link.href}>
-                <a href={link.href} className="navbar__link">
+                <a
+                  href={link.href}
+                  className="navbar__link"
+                  onClick={link.teleport ? teleportTop : undefined}
+                >
                   {link.label}
                 </a>
               </li>
@@ -48,6 +52,22 @@ function Navbar() {
       </div>
     </header>
   );
+}
+
+/* Yumuşak kaydırma yerine anında sıçrama ("ışınlanma").
+   scroll-behavior: smooth global olduğu için behavior:"instant"
+   ile bu tek hareketi bilinçli olarak devre dışı bırakıyoruz. */
+function teleportTop(event) {
+  event.preventDefault();
+  window.scrollTo({ top: 0, behavior: "instant" });
+  // Adres çubuğunda iz bırakmadan hedefi işaretle
+  const actions = document.getElementById("contact");
+  if (actions) {
+    actions.classList.remove("is-teleported");
+    // reflow: sınıfı hemen geri eklersek animasyon yeniden başlasın
+    void actions.offsetWidth;
+    actions.classList.add("is-teleported");
+  }
 }
 
 export default Navbar;

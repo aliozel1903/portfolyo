@@ -1,0 +1,181 @@
+/* Tam ekran karartma + ortada oyun paneli */
+.bgame {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  background-color: rgba(2, 6, 23, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.bgame__panel {
+  width: min(420px, 100%);
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+}
+
+.bgame__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+}
+
+.bgame__close {
+  font: inherit;
+  font-size: 0.9375rem;
+  line-height: 1;
+  padding: 6px 10px;
+  color: var(--color-text-muted);
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.bgame__close:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.bgame__stats {
+  display: flex;
+  gap: var(--space-sm);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Oyun alanı --- */
+.bgame__area {
+  position: relative;
+  height: 460px;
+  overflow: hidden;
+  cursor: none;              /* imleç yerine raketi görüyoruz */
+  touch-action: none;        /* parmakla oynarken sayfa kaymasın */
+  user-select: none;
+  background:
+    radial-gradient(circle at 50% 12%, var(--color-accent-glow), transparent 60%),
+    var(--color-bg);
+}
+
+/* Ortadaki dev, yarı saydam sayı — skor ve geri sayım */
+.bgame__watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 7rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--color-text);
+  opacity: 0.09;
+  pointer-events: none;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Top: profil fotoğrafı --- */
+.bgame__ball {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--color-accent);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35),
+              0 0 20px var(--color-accent-glow);
+  /* will-change: tarayıcıya "bu sürekli hareket edecek" der,
+     topu ayrı bir çizim katmanına alır — hareket pürüzsüzleşir. */
+  will-change: transform;
+}
+
+.bgame__ball img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;      /* sağ tık/sürükleme hedefi olmasın */
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.bgame__ball-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 1.75rem;
+  background-color: var(--color-surface);
+}
+
+/* --- Raket --- */
+.bgame__paddle {
+  position: absolute;
+  bottom: 42px;
+  left: 0;
+  width: 96px;
+  height: 16px;
+  border-radius: 999px;
+  background-color: var(--color-text);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  will-change: transform;
+}
+
+/* Başlangıç ve oyun sonu ekranı */
+.bgame__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  text-align: center;
+  background-color: rgba(2, 6, 23, 0.55);
+}
+
+.bgame__hint {
+  max-width: 30ch;
+  font-size: 0.875rem;
+  color: #e2e8f0;
+}
+
+.bgame__over-title {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.bgame__over-score {
+  font-size: 0.9375rem;
+  color: #cbd5e1;
+}
+
+.bgame__badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  color: var(--color-on-accent);
+  background-color: var(--color-accent);
+}
+
+@media (max-width: 480px) {
+  .bgame__area { height: 400px; }
+  .bgame__watermark { font-size: 5.5rem; }
+}
