@@ -29,21 +29,13 @@ function Hero() {
 
           {/* id="contact": üst menüdeki İletişim linki buraya kayar */}
           <div className="hero__actions" id="contact">
-            {/* SmartLink: linki "#" ise tıklanamaz <span> basar */}
-            <SmartLink className="btn btn--fire" href={profile.github}>
-              {/* Alevler butonun ARKASINDA duruyor ve kenarlarından
-                 taşarak yükseliyor; içeride hiçbir şey oynamıyor. */}
-              <span className="btn__flames" aria-hidden="true">
-                <i /><i /><i /><i /><i /><i /><i /><i /><i />
-              </span>
+            {/* SmartLink: linki "#" ise tıklanamaz <span> basar.
+               Parıltı ve dönen çerçeve tamamen CSS; ek eleman yok. */}
+            <SmartLink className="btn btn--github" href={profile.github}>
               <span className="btn__label">{t.hero.github}</span>
             </SmartLink>
 
-            <SmartLink className="btn btn--spark" href={profile.linkedin}>
-              {/* Kıvılcım yalnızca çerçevede dolaşır; iki hüzme
-                 birbirinin tersine dönerek elektrik hissini güçlendirir. */}
-              <span className="btn__arc" aria-hidden="true" />
-              <span className="btn__arc btn__arc--2" aria-hidden="true" />
+            <SmartLink className="btn btn--linkedin" href={profile.linkedin}>
               <span className="btn__label">{t.hero.linkedin}</span>
             </SmartLink>
 
@@ -53,10 +45,6 @@ function Hero() {
             >
               <EnvelopeIcon />
               <span className="btn__label">{t.hero.email}</span>
-              {/* Daktilo efekti: kağıdın üzerindeki yazı */}
-              <span className="btn__type" aria-hidden="true">
-                merhaba
-              </span>
             </SmartLink>
           </div>
         </div>
