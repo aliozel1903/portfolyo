@@ -140,11 +140,10 @@ export const ui = {
     },
     game: {
       title: "easter egg?",
-      hint: "Rakete fare veya parmakla yön ver; fotoğrafı yere düşürmeden sektir.",
+      
       score: "Skor",
       best: "Rekor",
       lives: "Can",
-      start: "Başla",
       restart: "Tekrar oyna",
       close: "Kapat",
       gameOver: "Oyun bitti",
@@ -190,11 +189,10 @@ export const ui = {
     },
     game: {
       title: "easter egg?",
-      hint: "Steer the paddle with your mouse or finger and keep the photo in the air.",
+      
       score: "Score",
       best: "Best",
       lives: "Lives",
-      start: "Start",
       restart: "Play again",
       close: "Close",
       gameOver: "Game over",
