@@ -6,6 +6,7 @@
 import { useLanguage } from "../context/LanguageContext";
 import LanguageSwitch from "./LanguageSwitch";
 import ThemeToggle from "./ThemeToggle";
+import { LogoMark } from "./icons";
 import "./Navbar.css";
 
 function Navbar() {
@@ -26,7 +27,8 @@ function Navbar() {
       <div className="navbar__inner container">
         {/* Logo: en üste dönüş */}
         <a href="#hero" className="navbar__logo">
-          AÖ
+          <LogoMark />
+          <span className="navbar__brand">aliozel.dev</span>
         </a>
 
         {/* <nav>: ekran okuyucuya "burası site navigasyonu" der */}

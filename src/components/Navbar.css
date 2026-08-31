@@ -22,10 +22,29 @@
 }
 
 .navbar__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
   font-weight: 700;
-  font-size: 1.125rem;
-  letter-spacing: 0.5px;
+  font-size: 1.0625rem;
+  letter-spacing: -0.2px;
   color: var(--color-text);
+}
+
+/* Marka işareti hover'da vurgu rengine döner */
+.navbar__logo .logo-mark {
+  color: var(--color-accent);
+  flex: none;
+  transition: transform 0.2s ease;
+}
+
+.navbar__logo:hover .logo-mark {
+  transform: translateY(-1px);
+}
+
+/* ".dev" uzantısı bir ton soluk — isim öne çıksın */
+.navbar__brand::after {
+  content: "";
 }
 
 .navbar__logo:hover {

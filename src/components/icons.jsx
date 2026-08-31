@@ -70,3 +70,69 @@ export function MoonIcon() {
     </svg>
   );
 }
+
+/* --- Marka işareti ---
+   Keskin açılardan kurulu bir "A": iki eğik kiriş, ortada kesik
+   bir kemer ve tepede kırpılmış bir köşe. Yuvarlak hat yok;
+   tüm kimlik düz çizgi ve açıdan geliyor. */
+export function LogoMark() {
+  return (
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 32 32"
+      aria-hidden="true"
+      className="logo-mark"
+    >
+      {/* dış çerçeve: köşesi kırpılmış altıgen */}
+      <path
+        d="M16 1.5 30 9v14l-14 7.5L2 23V9z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+        opacity="0.35"
+      />
+      {/* A'nın sol ve sağ kirişi */}
+      <path
+        d="M16 7 8.5 24.5M16 7l7.5 17.5"
+        stroke="currentColor"
+        strokeWidth="2.4"
+        strokeLinecap="square"
+      />
+      {/* ortadaki kemer — ortası boş bırakıldı, keskin duruyor */}
+      <path
+        d="M11.6 18.5h3.1M17.3 18.5h3.1"
+        stroke="currentColor"
+        strokeWidth="2.4"
+        strokeLinecap="square"
+      />
+    </svg>
+  );
+}
+
+/* Zarf — kapağı ayrı bir <path>, çünkü hover'da onu döndürüyoruz. */
+export function EnvelopeIcon() {
+  return (
+    <svg viewBox="0 0 32 24" className="envelope" aria-hidden="true">
+      {/* içinden çıkan kağıt (CSS ile yukarı kayar) */}
+      <rect className="envelope__paper" x="7" y="4" width="18" height="14" rx="1" />
+      <line className="envelope__line envelope__line--1" x1="10" y1="8" x2="22" y2="8" />
+      <line className="envelope__line envelope__line--2" x1="10" y1="11.5" x2="19" y2="11.5" />
+      {/* gövde */}
+      <path className="envelope__body" d="M2 6h28v16H2z" />
+      {/* kapak (hover'da üstten açılır) */}
+      <path className="envelope__flap" d="M2 6h28L16 16z" />
+    </svg>
+  );
+}
+
+/* Ördek — footer'ın sol köşesinde kaçan minik figür. */
+export function DuckIcon() {
+  return (
+    <svg {...base} width={16} height={16} viewBox="0 0 24 24" fill="currentColor" stroke="none">
+      <path d="M14 4a3.2 3.2 0 0 1 3.2 3.2c0 .4-.07.78-.2 1.13l2.4.67-2.1 1.5c-.5 3.6-3.6 6.5-7.3 6.5H4c0-2.3 1.3-4.3 3.2-5.3-.6-.7-1-1.6-1-2.6C6.2 6.7 8.5 4.4 11.3 4.4c.5 0 1 .07 1.4.2.4-.4.8-.6 1.3-.6zm.9 2.2a.7.7 0 1 0 0 1.4.7.7 0 0 0 0-1.4z" />
+      <path d="M4 17h6.5c.6 0 1.2.3 1.5.8l.7 1.2H6.8A2.8 2.8 0 0 1 4 17z" opacity="0.6" />
+    </svg>
+  );
+}

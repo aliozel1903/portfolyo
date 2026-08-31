@@ -1,17 +1,54 @@
 /* Karşılama bölümü — sayfanın ilk ekranı, biraz daha ferah. */
 .hero {
-  padding-block: calc(var(--space-xl) * 1.5) var(--space-xl);
+  position: relative;
+  padding-block: calc(var(--space-xl) * 1.2) var(--space-xl);
+  overflow: hidden;             /* dekoratif zemin taşmasın */
+}
+
+/* Dekoratif zemin: ince ızgara + tek bir vurgu parıltısı.
+   Keskin çizgiler, yumuşak ışık — kimliği bu ikili veriyor. */
+.hero__backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(ellipse 60% 50% at 15% 0%, var(--color-accent-glow), transparent 70%),
+    linear-gradient(var(--color-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+  background-size: 100% 100%, 64px 64px, 64px 64px;
+  opacity: 0.5;
+  /* Izgara aşağı doğru sönümlensin */
+  mask-image: linear-gradient(180deg, #000 0%, transparent 85%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 85%);
+}
+
+.hero__inner {
+  position: relative;           /* zeminin üstünde kalsın */
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.hero__text {
+  min-width: 0;                 /* uzun metin flex'i taşırmasın */
 }
 
 .hero__name {
   margin-bottom: var(--space-xs);
+  letter-spacing: -1px;
 }
 
 .hero__title {
-  font-size: 1.25rem;
-  font-weight: 500;
+  display: inline-block;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
   color: var(--color-accent);
   margin-bottom: var(--space-md);
+  padding-left: 12px;
+  /* Keskin bir dikey işaret — unvanı etiket gibi gösterir */
+  border-left: 3px solid var(--color-accent);
 }
 
 .hero__tagline {
@@ -26,23 +63,41 @@
   display: flex;
   flex-wrap: wrap;          /* dar ekranda alt alta insinler */
   gap: var(--space-sm);
+  scroll-margin-top: 90px;  /* menüden buraya kayınca üstte pay kalsın */
 }
 
-/* --- Buton kalıbı ---
-   Şimdilik Hero'ya ait; başka bölümler de kullanmaya başlarsa
-   index.css'e taşırız. */
+@media (max-width: 640px) {
+  .hero__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-md);
+  }
+}
+
+/* --- Buton kalıbı --- */
 .btn {
-  display: inline-block;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   padding: 10px 22px;
   font-size: 0.9375rem;
   font-weight: 600;
   border-radius: 999px;
   border: 1px solid transparent;
-  transition: background-color 0.15s ease, border-color 0.15s ease;
+  overflow: hidden;             /* efektler butonun dışına taşmasın */
+  isolation: isolate;           /* katman sırası bu kutuyla sınırlı */
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .btn:hover {
   text-decoration: none;    /* index.css'teki link altı çizgisini iptal et */
+}
+
+.btn__label {
+  position: relative;
+  z-index: 2;               /* efekt katmanlarının üstünde kalsın */
 }
 
 .btn--primary {
@@ -72,4 +127,225 @@
   border-color: var(--color-border);
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+/* ============================================================
+   1) ATEŞLİ GITHUB
+   Beş alev dili butonun altından yükselir; her biri farklı
+   gecikme ve süreyle titrediği için hareket düzensiz görünür.
+   ============================================================ */
+.btn--fire {
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+.btn--fire:hover {
+  color: #fff5e6;
+  border-color: #ff8a3d;
+}
+
+.btn__flames {
+  position: absolute;
+  inset: auto 0 -6px 0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 1;
+}
+
+.btn--fire:hover .btn__flames {
+  opacity: 1;
+}
+
+.btn__flames i {
+  display: block;
+  width: 16px;
+  height: 12px;
+  border-radius: 50% 50% 40% 40%;
+  /* Alev rengi: dipte sarı, tepede kırmızı */
+  background: radial-gradient(circle at 50% 85%, #ffd54a 0%, #ff9a1f 45%, #ff4d1f 80%);
+  filter: blur(3px);
+  transform-origin: 50% 100%;
+  animation: flame-flicker 900ms ease-in-out infinite;
+}
+
+.btn__flames i:nth-child(1) { animation-delay: 0ms;   animation-duration: 780ms; }
+.btn__flames i:nth-child(2) { animation-delay: 120ms; animation-duration: 950ms; }
+.btn__flames i:nth-child(3) { animation-delay: 60ms;  animation-duration: 680ms; }
+.btn__flames i:nth-child(4) { animation-delay: 200ms; animation-duration: 880ms; }
+.btn__flames i:nth-child(5) { animation-delay: 40ms;  animation-duration: 1020ms; }
+
+@keyframes flame-flicker {
+  0%, 100% { transform: scaleY(1) translateY(0); opacity: 0.85; }
+  40%      { transform: scaleY(2.4) translateY(-6px); opacity: 1; }
+  70%      { transform: scaleY(1.7) translateY(-2px); opacity: 0.9; }
+}
+
+/* ============================================================
+   2) ELEKTRİKLİ LINKEDIN
+   Kenarda dolaşan kıvılcım: conic-gradient bir halka döndürülüyor,
+   ortası maskeyle boşaltıldığı için sadece çerçeve parlıyor.
+   ============================================================ */
+.btn--spark {
+  color: var(--color-accent);
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+.btn--spark:hover {
+  border-color: transparent;
+  box-shadow: 0 0 18px var(--color-accent-glow);
+}
+
+.btn__arc {
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 0;
+
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 250deg,
+    #7cc4ff 300deg,
+    #ffffff 330deg,
+    #4d9fff 350deg,
+    transparent 360deg
+  );
+  /* Ortayı boşalt: yalnızca 2px'lik çerçeve görünsün */
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  padding: 2px;
+
+  animation: spark-run 1.6s linear infinite;
+}
+
+.btn--spark:hover .btn__arc {
+  opacity: 1;
+}
+
+@keyframes spark-run {
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================================
+   3) HAREKETLİ E-POSTA
+   Zarfın kapağı açılır, kağıt yukarı çıkar, üzerine daktilo
+   efektiyle yazı yazılır (genişliği adım adım artan bir kutu).
+   ============================================================ */
+.btn--mail {
+  color: var(--color-on-accent);
+  background-color: var(--color-accent);
+  padding-left: 18px;
+}
+
+.btn--mail:hover {
+  background-color: var(--color-accent-hover);
+  color: var(--color-on-accent);
+}
+
+.envelope {
+  width: 22px;
+  height: 17px;
+  overflow: visible;
+  flex: none;
+  z-index: 2;
+}
+
+.envelope__body {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.envelope__flap {
+  fill: currentColor;
+  opacity: 0.85;
+  transform-origin: 50% 25%;    /* üst kenardan menteşe gibi */
+  transition: transform 0.35s ease;
+}
+
+.btn--mail:hover .envelope__flap {
+  transform: rotateX(-160deg);
+}
+
+.envelope__paper {
+  fill: var(--color-bg);
+  stroke: currentColor;
+  stroke-width: 1.5;
+  transform: translateY(6px);
+  opacity: 0;
+  transition: transform 0.35s ease 0.12s, opacity 0.2s ease 0.12s;
+}
+
+.envelope__line {
+  stroke: currentColor;
+  stroke-width: 1.4;
+  opacity: 0;
+  transition: opacity 0.2s ease 0.3s;
+}
+
+.btn--mail:hover .envelope__paper {
+  transform: translateY(-9px);
+  opacity: 1;
+}
+
+.btn--mail:hover .envelope__line {
+  opacity: 0.55;
+}
+
+/* Daktilo yazısı — hover'da butonun içinde açılır */
+.btn__type {
+  display: inline-block;
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.8125rem;
+  opacity: 0;
+  border-right: 1px solid currentColor;
+  z-index: 2;
+}
+
+.btn--mail:hover .btn__type {
+  opacity: 1;
+  /* steps(): harf harf yazılıyormuş hissi veren kesikli geçiş */
+  animation: typing 0.7s steps(7) forwards, caret 0.7s step-end infinite;
+}
+
+@keyframes typing {
+  from { max-width: 0; }
+  to   { max-width: 70px; }
+}
+
+@keyframes caret {
+  50% { border-color: transparent; }
+}
+
+/* Hareketi azalt tercihi: tüm süslemeler kapanır, butonlar
+   sade renk değişimiyle çalışmaya devam eder. */
+@media (prefers-reduced-motion: reduce) {
+  .btn__flames i,
+  .btn__arc { animation: none; }
+  .btn__flames,
+  .btn__arc { opacity: 0 !important; }
+  .envelope__flap,
+  .envelope__paper,
+  .envelope__line { transition: none; }
+  .btn--mail:hover .envelope__flap { transform: none; }
+  .btn--mail:hover .btn__type { animation: none; opacity: 0; }
 }

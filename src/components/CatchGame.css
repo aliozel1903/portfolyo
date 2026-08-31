@@ -1,0 +1,148 @@
+/* Tam ekran karartma + ortada oyun paneli */
+.game {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+
+  background-color: rgba(2, 6, 23, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.game__panel {
+  width: min(560px, 100%);
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+
+.game__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: 10px var(--space-md);
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+}
+
+.game__title {
+  font-weight: 700;
+  font-size: 0.9375rem;
+}
+
+.game__stats {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.game__lives {
+  color: var(--color-accent);
+  letter-spacing: 1px;
+}
+
+.game__lives-empty {
+  opacity: 0.25;
+}
+
+.game__close {
+  font: inherit;
+  font-size: 0.875rem;
+  line-height: 1;
+  padding: 6px 9px;
+  color: var(--color-text-muted);
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.game__close:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+/* --- Oyun alanı --- */
+.game__area {
+  position: relative;
+  height: 340px;
+  overflow: hidden;
+  cursor: none;                 /* imleç yerine sepeti görüyoruz */
+  touch-action: none;           /* parmakla oynarken sayfa kaymasın */
+  background:
+    radial-gradient(circle at 50% 0%, var(--color-accent-glow), transparent 55%),
+    var(--color-bg);
+}
+
+.game__item {
+  position: absolute;
+  font-size: 1.5rem;
+  line-height: 1;
+  transform: translate(-50%, -50%);
+  user-select: none;
+}
+
+.game__basket {
+  position: absolute;
+  top: 87%;
+  font-size: 2rem;
+  line-height: 1;
+  transform: translate(-50%, -50%);
+  user-select: none;
+  filter: drop-shadow(0 0 10px var(--color-accent-glow));
+}
+
+/* Başlangıç ve oyun sonu ekranı */
+.game__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  text-align: center;
+  background-color: rgba(2, 6, 23, 0.55);
+}
+
+.game__hint {
+  max-width: 34ch;
+  font-size: 0.875rem;
+  color: var(--color-text);
+}
+
+.game__over-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.game__over-score {
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+}
+
+.game__badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  color: var(--color-on-accent);
+  background-color: var(--color-accent);
+}
+
+@media (max-width: 480px) {
+  .game__area { height: 300px; }
+  .game__stats { font-size: 0.6875rem; }
+}

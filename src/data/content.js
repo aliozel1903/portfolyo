@@ -19,6 +19,9 @@ export const profile = {
   // Ekranda düz metin olarak GÖSTERİLMEZ; yalnızca Footer'daki
   // ikonun mailto: adresini üretmek için kullanılır.
   email: "aliozel1025@gmail.com",
+  // Fotoğrafı public/ klasörüne "profile.jpg" adıyla bırakmak yeterli.
+  // Dosya yoksa Avatar bileşeni sessizce yedek görsele düşer.
+  photo: "/profile.jpg",
 };
 
 export const skills = [
@@ -104,8 +107,8 @@ export const experience = [
   {
     id: "sanko",
     organization: "SANKO Tekstil İşletmeleri - İSKO Şubesi",
-    tr: { role: "IT Stajyeri", period: "Haziran 2024 (20 günlük yaz stajı)" },
-    en: { role: "IT Intern", period: "June 2024 (20-day summer internship)" },
+    tr: { role: "IT Stajyeri", period: "30 Haziran 2025 - 29 Temmuz 2025" },
+    en: { role: "IT Intern", period: "30 June 2025 - 29 July 2025" },
   },
 ];
 
@@ -126,11 +129,31 @@ export const education = [
 export const ui = {
   tr: {
     hero: {
-      title: "Yazılım Geliştirici",
+      title: "Bilgisayar Mühendisi",
       tagline:
-        "Ölçeklenebilir web mimarileri (SaaS), masaüstü uygulamaları ve veritabanı yönetimi odaklı çözümler üreten yazılım geliştirici.",
+        "Bursa'da yaşayan; ölçeklenebilir web mimarileri (SaaS), masaüstü uygulamaları ve veritabanı yönetimi odaklı çözümler üreten bilgisayar mühendisi.",
       github: "GitHub",
       linkedin: "LinkedIn",
+      email: "E-posta",
+      avatarAlt: "Ali Özel'in profil fotoğrafı",
+      avatarTooltip: "Biraz mola?",
+    },
+    game: {
+      title: "Biraz mola?",
+      hint: "Fareyi veya parmağını hareket ettirerek sepeti oynat, düşenleri yakala.",
+      score: "Skor",
+      best: "Rekor",
+      lives: "Can",
+      start: "Başla",
+      restart: "Tekrar oyna",
+      close: "Kapat",
+      gameOver: "Oyun bitti",
+      finalScore: "Skorun",
+      newBest: "Yeni rekor!",
+    },
+    footer: {
+      location: "Bursa, Türkiye",
+      duck: "Yakalayabilirsen yakala",
     },
     projects: {
       github: "GitHub",
@@ -156,11 +179,31 @@ export const ui = {
   },
   en: {
     hero: {
-      title: "Software Developer",
+      title: "Computer Engineer",
       tagline:
-        "Software developer focused on scalable web architectures (SaaS), desktop applications, and database management solutions.",
+        "Bursa-based computer engineer focused on scalable web architectures (SaaS), desktop applications, and database management solutions.",
       github: "GitHub",
       linkedin: "LinkedIn",
+      email: "Email",
+      avatarAlt: "Profile photo of Ali Özel",
+      avatarTooltip: "Need a break?",
+    },
+    game: {
+      title: "Need a break?",
+      hint: "Move your mouse or finger to steer the basket and catch what falls.",
+      score: "Score",
+      best: "Best",
+      lives: "Lives",
+      start: "Start",
+      restart: "Play again",
+      close: "Close",
+      gameOver: "Game over",
+      finalScore: "Your score",
+      newBest: "New best!",
+    },
+    footer: {
+      location: "Bursa, Türkiye",
+      duck: "Catch me if you can",
     },
     projects: {
       github: "GitHub",
