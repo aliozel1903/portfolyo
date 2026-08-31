@@ -7,7 +7,6 @@ import Hero from "./components/Hero";
 import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import Experience from "./components/Experience";
-import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
 function App() {
@@ -21,10 +20,9 @@ function App() {
         <Skills />      {/* 2. Yetenekler */}
         <Projects />    {/* 3. Projeler */}
         <Experience />  {/* 4. Deneyim & Eğitim */}
-        <Contact />     {/* 5. İletişim */}
       </main>
 
-      {/* Durum çubuğu görünümlü alt bilgi */}
+      {/* 5. Durum çubuğu görünümlü alt bilgi */}
       <Footer />
     </div>
   );

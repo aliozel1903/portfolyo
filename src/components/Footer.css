@@ -18,7 +18,7 @@
 }
 
 .statusbar__left,
-.statusbar__right {
+.statusbar__center {
   display: flex;
   align-items: center;
   gap: var(--space-xs);
@@ -26,15 +26,34 @@
 
 .statusbar__time {
   font-variant-numeric: tabular-nums;  /* rakamlar eşit genişlikte,
-                                          dakika değişince satır oynamaz */
-  color: var(--color-text);
+                                          saat değişince satır oynamaz */
 }
 
-.statusbar__sep {
-  opacity: 0.5;
+.statusbar__icon {
+  display: inline-flex;
+  padding: 4px;
+  border-radius: 4px;
+  color: var(--color-text-muted);
+  transition: color 0.15s ease, background-color 0.15s ease;
 }
 
-/* Dar ekranda sürüm bilgisini gizle; saat ve konum kalsın. */
+.statusbar__icon:hover {
+  color: var(--color-accent);
+  background-color: var(--color-bg);
+}
+
+/* Linki henüz hazır olmayan ikon */
+.statusbar__icon.is-disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.statusbar__icon.is-disabled:hover {
+  color: var(--color-text-muted);
+  background-color: transparent;
+}
+
+/* Dar ekranda telifi gizle; saat ve ikonlar kalsın. */
 @media (max-width: 560px) {
   .statusbar__right {
     display: none;

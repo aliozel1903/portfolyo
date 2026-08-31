@@ -22,30 +22,10 @@
 }
 
 .navbar__logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
   font-weight: 700;
-  font-size: 1.0625rem;
-  letter-spacing: -0.2px;
+  font-size: 1.125rem;
+  letter-spacing: 0.5px;
   color: var(--color-text);
-}
-
-/* Kartal işareti — hover'da hafifçe süzülür */
-.navbar__eagle {
-  font-size: 1.25rem;
-  line-height: 1;
-  display: inline-block;
-  transition: transform 0.25s ease;
-}
-
-.navbar__logo:hover .navbar__eagle {
-  transform: translateY(-2px) rotate(-6deg);
-}
-
-/* ".dev" uzantısı bir ton soluk — isim öne çıksın */
-.navbar__brand::after {
-  content: "";
 }
 
 .navbar__logo:hover {

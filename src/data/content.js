@@ -16,8 +16,8 @@ export const profile = {
   name: "Ali Özel",
   github: "https://github.com/aliozel1903",
   linkedin: "https://www.linkedin.com/in/ali-ozel-dev",
-  // Ekranda düz metin olarak GÖSTERİLMEZ; yalnızca İletişim
-  // bölümündeki butonun mailto: hedefini üretmek için kullanılır.
+  // Ekranda düz metin olarak GÖSTERİLMEZ; yalnızca Footer'daki
+  // ikonun mailto: adresini üretmek için kullanılır.
   email: "aliozel1025@gmail.com",
 };
 
@@ -126,18 +126,11 @@ export const education = [
 export const ui = {
   tr: {
     hero: {
-      title: "Bilgisayar Mühendisi",
+      title: "Yazılım Geliştirici",
       tagline:
-        "Bursa'da yaşayan; ölçeklenebilir web mimarileri (SaaS), masaüstü uygulamaları ve veritabanı yönetimi odaklı çözümler üreten bilgisayar mühendisi.",
+        "Ölçeklenebilir web mimarileri (SaaS), masaüstü uygulamaları ve veritabanı yönetimi odaklı çözümler üreten yazılım geliştirici.",
       github: "GitHub",
       linkedin: "LinkedIn",
-      email: "E-posta",
-    },
-    contact: {
-      text: "Bir proje, iş birliği veya soru için aşağıdaki bağlantılardan bana ulaşabilirsiniz.",
-    },
-    footer: {
-      location: "Bursa, Türkiye",
     },
     projects: {
       github: "GitHub",
@@ -163,18 +156,11 @@ export const ui = {
   },
   en: {
     hero: {
-      title: "Computer Engineer",
+      title: "Software Developer",
       tagline:
-        "Bursa-based computer engineer focused on scalable web architectures (SaaS), desktop applications, and database management solutions.",
+        "Software developer focused on scalable web architectures (SaaS), desktop applications, and database management solutions.",
       github: "GitHub",
       linkedin: "LinkedIn",
-      email: "Email",
-    },
-    contact: {
-      text: "Feel free to reach out through the links below for a project, collaboration, or any question.",
-    },
-    footer: {
-      location: "Bursa, Türkiye",
     },
     projects: {
       github: "GitHub",
