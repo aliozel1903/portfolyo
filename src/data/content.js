@@ -16,12 +16,9 @@ export const profile = {
   name: "Ali Özel",
   github: "https://github.com/aliozel1903",
   linkedin: "https://www.linkedin.com/in/ali-ozel-dev",
-  // Ekranda düz metin olarak GÖSTERİLMEZ; yalnızca Footer'daki
-  // ikonun mailto: adresini üretmek için kullanılır.
+  // Ekranda düz metin olarak GÖSTERİLMEZ; yalnızca İletişim
+  // bölümündeki butonun mailto: hedefini üretmek için kullanılır.
   email: "aliozel1025@gmail.com",
-  // Fotoğrafı public/ klasörüne "profile.jpg" adıyla bırakmak yeterli.
-  // Dosya yoksa Avatar bileşeni sessizce yedek görsele düşer.
-  photo: "/profile.jpg",
 };
 
 export const skills = [
@@ -135,20 +132,9 @@ export const ui = {
       github: "GitHub",
       linkedin: "LinkedIn",
       email: "E-posta",
-      avatarAlt: "Ali Özel'in profil fotoğrafı",
-      avatarTooltip: "easter egg?",
     },
-    game: {
-      title: "easter egg?",
-      
-      score: "Skor",
-      best: "Rekor",
-      lives: "Can",
-      restart: "Tekrar oyna",
-      close: "Kapat",
-      gameOver: "Oyun bitti",
-      finalScore: "Skorun",
-      newBest: "Yeni rekor!",
+    contact: {
+      text: "Bir proje, iş birliği veya soru için aşağıdaki bağlantılardan bana ulaşabilirsiniz.",
     },
     footer: {
       location: "Bursa, Türkiye",
@@ -183,20 +169,9 @@ export const ui = {
       github: "GitHub",
       linkedin: "LinkedIn",
       email: "Email",
-      avatarAlt: "Profile photo of Ali Özel",
-      avatarTooltip: "easter egg?",
     },
-    game: {
-      title: "easter egg?",
-      
-      score: "Score",
-      best: "Best",
-      lives: "Lives",
-      restart: "Play again",
-      close: "Close",
-      gameOver: "Game over",
-      finalScore: "Your score",
-      newBest: "New best!",
+    contact: {
+      text: "Feel free to reach out through the links below for a project, collaboration, or any question.",
     },
     footer: {
       location: "Bursa, Türkiye",

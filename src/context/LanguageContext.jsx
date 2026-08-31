@@ -16,7 +16,7 @@ const LanguageContext = createContext(null);
 
 // Tercihin tarayıcıda saklanacağı anahtar.
 const STORAGE_KEY = "portfolio-lang";
-const DEFAULT_LANG = "tr";
+const DEFAULT_LANG = "en";   // sitenin varsayılan açılış dili
 
 /* Sayfa ilk açılırken çalışır: daha önce seçilmiş bir dil var mı?
    Değeri doğrulamadan kullanmıyoruz — localStorage kullanıcının

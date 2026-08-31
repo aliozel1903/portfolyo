@@ -1,54 +1,17 @@
 /* Karşılama bölümü — sayfanın ilk ekranı, biraz daha ferah. */
 .hero {
-  position: relative;
-  padding-block: calc(var(--space-xl) * 1.2) var(--space-xl);
-  overflow: hidden;             /* dekoratif zemin taşmasın */
-}
-
-/* Dekoratif zemin: ince ızgara + tek bir vurgu parıltısı.
-   Keskin çizgiler, yumuşak ışık — kimliği bu ikili veriyor. */
-.hero__backdrop {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    radial-gradient(ellipse 60% 50% at 15% 0%, var(--color-accent-glow), transparent 70%),
-    linear-gradient(var(--color-border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
-  background-size: 100% 100%, 64px 64px, 64px 64px;
-  opacity: 0.5;
-  /* Izgara aşağı doğru sönümlensin */
-  mask-image: linear-gradient(180deg, #000 0%, transparent 85%);
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 85%);
-}
-
-.hero__inner {
-  position: relative;           /* zeminin üstünde kalsın */
-  display: flex;
-  align-items: center;
-  gap: var(--space-lg);
-}
-
-.hero__text {
-  min-width: 0;                 /* uzun metin flex'i taşırmasın */
+  padding-block: calc(var(--space-xl) * 1.5) var(--space-xl);
 }
 
 .hero__name {
   margin-bottom: var(--space-xs);
-  letter-spacing: -1px;
 }
 
 .hero__title {
-  display: inline-block;
-  font-size: 1.0625rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+  font-size: 1.25rem;
+  font-weight: 500;
   color: var(--color-accent);
   margin-bottom: var(--space-md);
-  padding-left: 12px;
-  /* Keskin bir dikey işaret — unvanı etiket gibi gösterir */
-  border-left: 3px solid var(--color-accent);
 }
 
 .hero__tagline {
@@ -63,221 +26,50 @@
   display: flex;
   flex-wrap: wrap;          /* dar ekranda alt alta insinler */
   gap: var(--space-sm);
-  scroll-margin-top: 90px;  /* menüden buraya kayınca üstte pay kalsın */
 }
 
-/* Işınlanma sonrası butonların etrafında kısa bir vurgu dalgası:
-   kullanıcı nereye geldiğini görsün. Animasyon bitince sınıf
-   kalsa da tekrar oynatmak için JS sınıfı yeniden ekliyor. */
-.hero__actions.is-teleported {
-  animation: teleport-flash 0.9s ease-out;
-  border-radius: 999px;
-}
-
-@keyframes teleport-flash {
-  0%   { box-shadow: 0 0 0 0 var(--color-accent-glow); }
-  40%  { box-shadow: 0 0 0 14px transparent; }
-  100% { box-shadow: 0 0 0 0 transparent; }
-}
-
-@media (max-width: 640px) {
-  .hero__inner {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-md);
-  }
-}
-
-/* ============================================================
-   BUTONLAR
-
-   İki teknik üst üste biniyor:
-
-   1) Dönen ışıklı çerçeve
-      Butona saydam bir border veriyoruz ve iki katmanlı bir
-      background kuruyoruz:
-        · linear-gradient(...) padding-box  → içteki koyu yüzey
-        · conic-gradient(...) border-box    → border alanını dolduran ışık
-      Koyu yüzey border alanını kapatmadığı için conic-gradient
-      yalnızca 1px'lik çerçevede görünür. Açıyı @property ile
-      tanımlı --angle değişkeni döndürüyor.
-
-      NOT: conic-gradient'in açısı normalde animasyon yapılamaz.
-      @property ile --angle'ı <angle> tipinde kaydettiğimiz için
-      tarayıcı onu sayı gibi ara değerlere bölebiliyor.
-
-   2) Parıltı akışı (shimmer)
-      ::after üzerinde çapraz, dar bir beyaz bant. translateX
-      -150% → 150% arasında kayıyor; hover değil, sürekli.
-   ============================================================ */
-
-@property --angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-
+/* --- Buton kalıbı ---
+   Sade ve tahmin edilebilir: yalnızca renk değişimi. */
 .btn {
-  --surface: #0b0f19;          /* iç yüzey — her temada koyu kalır */
-  --glow-1: #4d9fff;
-  --glow-2: #7cc4ff;
-  --glow-3: rgba(77, 159, 255, 0.05);
-
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  padding: 11px 24px;
-
+  display: inline-block;
+  padding: 10px 22px;
   font-size: 0.9375rem;
   font-weight: 600;
-  letter-spacing: 0.1px;
-  color: #f4f7fb;
-
-  border: 1px solid transparent;   /* ışığın dolduracağı şerit */
   border-radius: 999px;
-  overflow: hidden;                /* parıltı köşelerden taşmasın */
-  isolation: isolate;
-
-  /* İçte koyu yüzey, kenarda dönen ışık */
-  background:
-    linear-gradient(var(--surface), var(--surface)) padding-box,
-    conic-gradient(
-      from var(--angle),
-      var(--glow-3) 0deg,
-      var(--glow-1) 90deg,
-      var(--glow-2) 140deg,
-      var(--glow-3) 220deg,
-      var(--glow-3) 360deg
-    ) border-box;
-
-  animation: btn-angle 4s linear infinite;
-  transition: color 0.2s ease, transform 0.2s ease;
+  border: 1px solid transparent;
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .btn:hover {
-  text-decoration: none;
-  color: #ffffff;
-  transform: translateY(-1px);
-  animation-duration: 1.6s;        /* hover'da çerçeve hızlanır */
+  text-decoration: none;    /* index.css'teki link altı çizgisini iptal et */
 }
 
-.btn:active {
-  transform: translateY(0);
+.btn--primary {
+  background-color: var(--color-accent);
+  color: var(--color-on-accent);
 }
 
-@keyframes btn-angle {
-  to { --angle: 360deg; }
+.btn--primary:hover {
+  background-color: var(--color-accent-hover);
+  color: var(--color-on-accent);
 }
 
-/* Etiket ve ikon, parıltının üstünde kalsın */
-.btn__label,
-.btn .envelope {
-  position: relative;
-  z-index: 2;
+.btn--outline {
+  color: var(--color-accent);
+  border-color: var(--color-border);
 }
 
-/* --- Parıltı akışı --- */
-.btn::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background: linear-gradient(
-    105deg,
-    transparent 38%,
-    rgba(255, 255, 255, 0.06) 45%,
-    rgba(255, 255, 255, 0.55) 50%,
-    rgba(255, 255, 255, 0.06) 55%,
-    transparent 62%
-  );
-  transform: translateX(-150%);
-  animation: btn-shimmer 3s ease-in-out infinite;
+.btn--outline:hover {
+  border-color: var(--color-accent);
 }
 
-@keyframes btn-shimmer {
-  0%   { transform: translateX(-150%); }
-  /* Parıltı hızlı geçer, kalan süre bekler: sürekli ama yorucu değil */
-  55%  { transform: translateX(150%); }
-  100% { transform: translateX(150%); }
-}
-
-/* Her butonun kendi ışık kimliği --- yalnızca renk değişkenleri */
-.btn--github {
-  --glow-1: #ff8a3d;
-  --glow-2: #ffd166;
-  --glow-3: rgba(255, 138, 61, 0.05);
-}
-
-.btn--linkedin {
-  --glow-1: #2f7fe0;
-  --glow-2: #8fd0ff;
-  --glow-3: rgba(47, 127, 224, 0.05);
-}
-
-.btn--mail {
-  --glow-1: #7c5cff;
-  --glow-2: #4dd7ff;
-  --glow-3: rgba(124, 92, 255, 0.05);
-}
-
-/* Parıltılar aynı anda geçmesin; sıralı akış daha pahalı durur */
-.btn--linkedin::after { animation-delay: 0.4s; }
-.btn--mail::after     { animation-delay: 0.8s; }
-
-.btn--linkedin { animation-delay: -1.3s; }
-.btn--mail     { animation-delay: -2.6s; }
-
-/* Zarf ikonu — sade, animasyonsuz */
-.envelope {
-  width: 20px;
-  height: 15px;
-  flex: none;
-}
-
-.envelope__body {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linejoin: round;
-}
-
-.envelope__flap {
-  fill: currentColor;
-  opacity: 0.9;
-}
-
-.envelope__paper,
-.envelope__line {
-  display: none;    /* eski açılma animasyonundan kalan parçalar */
-}
-
-/* Linki henüz hazır olmayan buton: ışık söner, tıklanamaz. */
+/* Linki henüz hazır olmayan buton: soluk ve tıklanamaz.
+   (Etiket <span> olduğu için tıklama zaten mümkün değil.) */
 .btn.is-disabled {
   color: var(--color-text-muted);
-  background: linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
-    linear-gradient(var(--color-border), var(--color-border)) border-box;
-  opacity: 0.55;
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+  opacity: 0.6;
   cursor: not-allowed;
-  animation: none;
-  transform: none;
-}
-
-.btn.is-disabled::after {
-  display: none;
-}
-
-/* Hareketi azalt tercihi: ışık ve parıltı durur, çerçeve sabit kalır. */
-@media (prefers-reduced-motion: reduce) {
-  .btn,
-  .btn::after {
-    animation: none;
-  }
-  .btn::after {
-    opacity: 0;
-  }
-  .btn:hover {
-    transform: none;
-  }
 }
