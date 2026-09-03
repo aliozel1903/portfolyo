@@ -22,10 +22,24 @@
 }
 
 .navbar__logo {
-  font-weight: 700;
-  font-size: 1.125rem;
-  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 7px;
+  font-weight: 600;
+  font-size: 1.0625rem;
+  letter-spacing: -0.2px;
   color: var(--color-text);
+}
+
+/* ">_<" işareti monospace: terminal hissini bu veriyor */
+.navbar__logo-mark {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-weight: 700;
+  color: var(--color-terminal);
+}
+
+.navbar__logo-name {
+  font-weight: 600;
 }
 
 .navbar__logo:hover {

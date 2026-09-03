@@ -10,19 +10,23 @@
    dediğinizde 40 yeri değil, aşağıdaki tek satırı değiştireceğiz. */
 :root {
   /* Renkler — AÇIK TEMA (varsayılan değerler).
+     Apple'ın dili: nötr griler, tek bir renk vurgusu yok.
      Karanlık tema aşağıda aynı isimlere yeni değer veriyor;
      bileşen dosyalarında tek bir renk kodu yok. */
   --color-bg: #ffffff;
-  --color-surface: #f8f9fa;      /* gri şeritler, rozet zeminleri */
+  --color-surface: #f5f5f7;      /* gri şeritler, rozet zeminleri */
   --color-card: #ffffff;         /* proje kartlarının zemini */
-  --color-border: #e2e5e9;
-  --color-text: #1c1e21;         /* başlıklar, ana metin */
-  --color-text-muted: #5b6470;   /* tarih, açıklama, ikincil metin */
-  --color-accent: #0a66c2;       /* linkler ve vurgular */
-  --color-accent-hover: #084d94; /* vurgunun hover tonu */
-  --color-on-accent: #ffffff;    /* mavi zemin üzerindeki yazı */
-  --color-accent-glow: rgba(10, 102, 194, 0.15);  /* hover gölgesi */
+  --color-border: #d2d2d7;
+  --color-text: #1d1d1f;         /* başlıklar, ana metin */
+  --color-text-muted: #6e6e73;   /* tarih, açıklama, ikincil metin */
+  --color-accent: #1d1d1f;       /* vurgu da nötr: koyu üzerine açık */
+  --color-accent-hover: #000000;
+  --color-on-accent: #ffffff;    /* koyu zemin üzerindeki yazı */
+  --color-accent-glow: rgba(0, 0, 0, 0.08);
   --color-nav-bg: rgba(255, 255, 255, 0.72);      /* cam efektli menü */
+
+  /* Terminal yeşili — yalnızca hero'daki isim satırında kullanılır */
+  --color-terminal: #00ff41;
 
   /* Ölçek — boşlukları göz kararı değil, sabit bir merdivenden seçeriz */
   --space-xs: 0.5rem;
@@ -65,10 +69,9 @@ img {
   display: block;
 }
 
-/* Menü linkleri #projects'e atlarken sert zıplamasın, yumuşak kaysın */
-html {
-  scroll-behavior: smooth;
-}
+/* NOT: scroll-behavior burada TANIMLI DEĞİL.
+   Kaydırmayı Lenis yönetiyor; ikisi aynı anda çalışırsa
+   birbirleriyle yarışıp takılma hissi yaratıyorlar. */
 
 /* --- 3. Tipografi ------------------------------------------ */
 h1, h2, h3 {
@@ -146,19 +149,17 @@ ul {
    yeniden tanımlanır. Tek bir bileşen dosyasına dokunulmuyor.
    ============================================================ */
 :root[data-theme="dark"] {
-  --color-bg: #0f172a;           /* slate-900: derinliği olan koyu zemin */
-  --color-surface: #1e293b;      /* şeritler bir ton açık */
-  /* Koyu temada kart, sayfa zemininden bir ton AÇIK olmalı;
-     aksi halde sadece çerçeveyle ayrışır ve düz görünür. */
-  --color-card: #1a2537;
-  --color-border: #334155;
-  --color-text: #e2e8f0;         /* saf beyaz değil — göz yormasın */
-  --color-text-muted: #94a3b8;
-  --color-accent: #4d9fff;       /* koyu zeminde okunan açık mavi */
-  --color-accent-hover: #7cb8ff; /* koyuda hover DAHA AÇIK olmalı */
-  --color-on-accent: #0f172a;    /* açık mavi zemine koyu yazı */
-  --color-accent-glow: rgba(77, 159, 255, 0.22);
-  --color-nav-bg: rgba(15, 23, 42, 0.72);
+  --color-bg: #000000;           /* Apple'ın koyu modu: tam siyah */
+  --color-surface: #1d1d1f;      /* şeritler ve kartlar bir ton açık */
+  --color-card: #1d1d1f;
+  --color-border: #2c2c2e;
+  --color-text: #f5f5f7;         /* keskin beyaz */
+  --color-text-muted: #86868b;   /* Apple'ın ikincil gri tonu */
+  --color-accent: #f5f5f7;       /* vurgu nötr: açık üzerine koyu */
+  --color-accent-hover: #ffffff;
+  --color-on-accent: #000000;
+  --color-accent-glow: rgba(255, 255, 255, 0.10);
+  --color-nav-bg: rgba(0, 0, 0, 0.72);
 
   /* Tarayıcının kendi arayüzü de (kaydırma çubuğu, form
      elemanları, seçim rengi) koyu moda geçsin. */

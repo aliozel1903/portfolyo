@@ -26,7 +26,9 @@ function Navbar() {
       <div className="navbar__inner container">
         {/* Logo: en üste dönüş */}
         <a href="#hero" className="navbar__logo">
-          AÖ
+          {/* Metin logo: terminal istemi + alan adı */}
+          <span className="navbar__logo-mark">&gt;_&lt;</span>
+          <span className="navbar__logo-name">aliozel.dev</span>
         </a>
 
         {/* <nav>: ekran okuyucuya "burası site navigasyonu" der */}

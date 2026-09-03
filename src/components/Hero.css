@@ -7,6 +7,36 @@
   margin-bottom: var(--space-xs);
 }
 
+/* --- Terminal satırı --- */
+.terminal {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35em;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  color: var(--color-terminal);
+  /* Yazarken satır genişliği büyüyor; altındaki metin zıplamasın diye
+     yüksekliği sabitliyoruz. */
+  min-height: 1.25em;
+}
+
+.terminal__prompt {
+  opacity: 0.75;
+}
+
+/* İmleç: 1 saniyelik açık/kapalı döngü.
+   steps(1) ile yumuşak geçiş yok — gerçek terminaldeki gibi keskin. */
+.terminal__caret {
+  animation: caret-blink 1s steps(1) infinite;
+}
+
+@keyframes caret-blink {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .terminal__caret { animation: none; }
+}
+
 .hero__title {
   font-size: 1.25rem;
   font-weight: 500;
