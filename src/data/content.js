@@ -153,7 +153,6 @@ export const ui = {
     experience: {
       work: "Deneyim",
       education: "Eğitim",
-      next: "Sırada ne var?",
     },
     sections: {
       skills: "Yetenekler",
@@ -184,7 +183,6 @@ export const ui = {
     experience: {
       work: "Experience",
       education: "Education",
-      next: "What's next?",
     },
     sections: {
       skills: "Skills",

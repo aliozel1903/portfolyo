@@ -10,9 +10,10 @@
 import { useEffect, useRef } from "react";
 import "./MatrixRain.css";
 
-const GLYPHS = "アイウエオカキクケコサシスセソタチツテトナニヌネノ01234567890101<>/{}[]$#";
-const FONT_SIZE = 14;
-const SPEED = 0.55;        // düşüş hızı (satır/kare) — bilinçli olarak yavaş
+/* Filmdeki gibi: yarım genişlikli katakana + rakamlar. */
+const GLYPHS =
+  "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789";
+const FONT_SIZE = 15;
 
 function MatrixRain() {
   const canvasRef = useRef(null);
@@ -27,7 +28,8 @@ function MatrixRain() {
     if (reduced) return;
 
     const ctx = canvas.getContext("2d");
-    let drops = [];
+    let drops = [];      // her sütunun baş karakterinin satır konumu
+    let speeds = [];     // sütunlar farklı hızda düşsün
     let frame = 0;
     let visible = true;
 
@@ -47,6 +49,12 @@ function MatrixRain() {
       drops = Array.from({ length: columns }, () =>
         Math.random() * (height / FONT_SIZE)
       );
+      speeds = Array.from({ length: columns }, () => 0.4 + Math.random() * 0.75);
+
+      // Siyah zemini bir kez bas: sonraki karelerde yalnızca
+      // yarı saydam katman gelecek.
+      ctx.fillStyle = "#050805";
+      ctx.fillRect(0, 0, width, height);
     };
 
     const draw = () => {
@@ -57,19 +65,42 @@ function MatrixRain() {
 
       // Şeffaf siyah katman: eski karakterleri silmek yerine
       // soldurur — düşen izin kuyruğu böyle oluşuyor.
-      ctx.fillStyle = "rgba(0, 0, 0, 0.06)";
+      ctx.fillStyle = "rgba(5, 8, 5, 0.085)";
       ctx.fillRect(0, 0, w, h);
 
-      ctx.fillStyle = "#008f11";
       for (let i = 0; i < drops.length; i += 1) {
+        const x = i * FONT_SIZE;
+        const y = drops[i] * FONT_SIZE;
         const char = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
-        ctx.fillText(char, i * FONT_SIZE, drops[i] * FONT_SIZE);
+
+        // Baş karakter neredeyse beyaz ve parlıyor; filmdeki
+        // "damlanın ucu" etkisini veren şey bu.
+        ctx.shadowColor = "#00ff41";
+        ctx.shadowBlur = 8;
+        ctx.fillStyle = "#c8ffd0";
+        ctx.fillText(char, x, y);
+
+        // Hemen arkasındaki birkaç karakter parlak yeşil,
+        // gerisi zaten sönerek kuyruğu oluşturuyor.
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = "#00ff41";
+        ctx.fillText(
+          GLYPHS[Math.floor(Math.random() * GLYPHS.length)],
+          x,
+          y - FONT_SIZE
+        );
+        ctx.fillStyle = "#12b53a";
+        ctx.fillText(
+          GLYPHS[Math.floor(Math.random() * GLYPHS.length)],
+          x,
+          y - FONT_SIZE * 2
+        );
 
         // Alt kenarı geçen sütun rastgele bir gecikmeyle başa döner
-        if (drops[i] * FONT_SIZE > h && Math.random() > 0.975) {
+        if (y > h && Math.random() > 0.97) {
           drops[i] = 0;
         }
-        drops[i] += SPEED;
+        drops[i] += speeds[i];
       }
     };
 

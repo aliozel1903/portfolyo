@@ -2,7 +2,7 @@
    Yükseklik sabit: yol ve durak yüzdeleri buna göre hesaplanıyor. */
 .map {
   position: relative;
-  height: 720px;
+  height: 560px;
 }
 
 .map__path {
@@ -28,17 +28,6 @@
   stroke-linecap: round;
   stroke-dasharray: 7 11;
   opacity: 0.75;
-}
-
-/* Karavan: iki durak arasında, yolun üstünde duruyor.
-   Konum yüzde olduğu için harita esnese de yolda kalıyor. */
-.map__rv {
-  position: absolute;
-  left: 50%;
-  top: 44%;
-  transform: translate(-50%, -50%) rotate(-14deg);
-  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.35));
-  pointer-events: none;
 }
 
 /* --- Duraklar --- */
@@ -88,14 +77,6 @@
   box-shadow: 0 0 0 6px var(--color-bg), var(--shadow-card);
 }
 
-/* Son durak — henüz bilinmiyor: içi boş, kenarı vurgulu */
-.stop--next .stop__node {
-  color: var(--color-terminal);
-  background-color: var(--color-card);
-  box-shadow: 0 0 0 2px var(--color-terminal) inset,
-    0 0 0 6px var(--color-bg), var(--shadow-card);
-}
-
 .stop__card {
   min-width: 0;
 }
@@ -135,8 +116,7 @@
     height: auto;
   }
 
-  .map__path,
-  .map__rv {
+  .map__path {
     display: none;
   }
 

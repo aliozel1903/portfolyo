@@ -2,7 +2,7 @@
    Renkleri BİLEREK token'a bağlamadık: kart her iki temada da
    aynı kırık beyaz tonunu koruyor. */
 .skills__paper {
-  --paper-bg: #f7f8fa;
+  --paper-bg: #050805;   /* Matrix ekranı: yağmurun arkası siyah */
   --paper-chip: #e4e6eb;
   --paper-text: #1d1d1f;
 
@@ -25,7 +25,8 @@
 
 .skills__badge {
   padding: 8px 18px;
-  backdrop-filter: blur(2px);   /* arkadaki yağmur yazıyı bozmasın */
+  /* Yağmurun üstünde okunabilirlik için hafif bulanıklık */
+  backdrop-filter: blur(3px);
   font-size: 0.9375rem;
   font-weight: 500;
   color: var(--paper-text);
