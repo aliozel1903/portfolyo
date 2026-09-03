@@ -158,6 +158,7 @@ export const ui = {
     experience: {
       work: "Deneyim",
       education: "Eğitim",
+      scrollHint: "keşfetmek için kaydır",
     },
     sections: {
       skills: "Yetenekler",
@@ -193,6 +194,7 @@ export const ui = {
     experience: {
       work: "Experience",
       education: "Education",
+      scrollHint: "scroll to explore",
     },
     sections: {
       skills: "Skills",

@@ -62,6 +62,10 @@ function Experience() {
   const scrollYProgress = useMotionValue(0);
   const drawn = useTransform(scrollYProgress, [0, DRAW_END], [0, 1]);
 
+  /* Yönlendirme ipucu: kullanıcı kaydırmaya başlar başlamaz sönüyor.
+     İşini yaptıktan sonra ekranda durması gereksiz gürültü olurdu. */
+  const hintOpacity = useTransform(scrollYProgress, [0, 0.06], [1, 0]);
+
   /* İlerlemeyi her karede ölç. Döngü yalnızca bölüm ekrana yakınken
      çalışır; uzaktayken boşuna kare harcamıyoruz. */
   useEffect(() => {
@@ -144,6 +148,25 @@ function Experience() {
       <div className="experience__pin" ref={pinRef}>
         <div className="container">
           <h2 className="section-title">{t.sections.experience}</h2>
+
+          <motion.p className="scroll-hint" style={{ opacity: hintOpacity }}>
+            <span className="scroll-hint__text">{t.experience.scrollHint}</span>
+            {/* İnce chevron, yavaşça aşağı süzülür */}
+            <svg
+              className="scroll-hint__chevron"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </motion.p>
 
           <div className="map">
             <svg

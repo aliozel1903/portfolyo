@@ -184,3 +184,36 @@
     height: auto;
   }
 }
+
+/* --- Kaydırma ipucu ---
+   Bölüm başlığının hemen altında, sessiz bir yönlendirme.
+   Kullanıcı kaydırmaya başlayınca kendiliğinden sönüyor. */
+.scroll-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin: calc(var(--space-lg) * -1 + 6px) 0 var(--space-md);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 1.4px;
+  text-transform: lowercase;
+  color: var(--color-text-muted);
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+.scroll-hint__chevron {
+  /* Yavaş ve küçük bir salınım: fark edilir ama dikkat çalmaz */
+  animation: hint-drift 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes hint-drift {
+  0%, 100% { transform: translateY(-1px); opacity: 0.5; }
+  50%      { transform: translateY(4px); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-hint__chevron { animation: none; }
+  .scroll-hint { display: none; }
+}
