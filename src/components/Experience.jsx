@@ -12,7 +12,7 @@ function Experience() {
   const { lang, t } = useLanguage();
 
   return (
-    <section id="experience" className="section section--alt">
+    <section id="experience" className="section">
       <div className="container">
         <h2 className="section-title">{t.sections.experience}</h2>
 

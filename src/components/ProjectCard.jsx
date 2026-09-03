@@ -17,28 +17,37 @@ function ProjectCard({ project }) {
 
   return (
     <article className="card">
-      <h3 className="card__title">{text.title}</h3>
-      <p className="card__description">{text.description}</p>
+      {/* macOS pencere başlık çubuğu — tamamen dekoratif olduğu için
+         ekran okuyucudan gizli. */}
+      <div className="card__bar" aria-hidden="true">
+        <span className="card__light card__light--red" />
+        <span className="card__light card__light--yellow" />
+        <span className="card__light card__light--green" />
+      </div>
 
-      {/* Teknoloji rozetleri — Skills'tekilerin küçük kardeşi */}
-      <ul className="card__tech">
-        {project.tech.map((item) => (
-          <li key={item} className="card__tech-item">
-            {item}
-          </li>
-        ))}
-      </ul>
+      <div className="card__body">
+        <h3 className="card__title">{text.title}</h3>
+        <p className="card__description">{text.description}</p>
 
-      {/* mt-auto benzeri bir iş: bu blok kartın en altına yapışır,
-         böylece farklı uzunluktaki kartlarda butonlar aynı hizada durur.
-         (Hizalamayı ProjectCard.css'teki margin-top:auto sağlıyor.) */}
-      <div className="card__links">
-        <SmartLink className="card__link" href={project.github}>
-          {t.projects.github}
-        </SmartLink>
-        <SmartLink className="card__link" href={project.demo}>
-          {t.projects.demo}
-        </SmartLink>
+        {/* Teknoloji rozetleri — Skills'tekilerin küçük kardeşi */}
+        <ul className="card__tech">
+          {project.tech.map((item) => (
+            <li key={item} className="card__tech-item">
+              {item}
+            </li>
+          ))}
+        </ul>
+
+        {/* margin-top: auto ile bu blok kartın en altına yapışır;
+           farklı uzunluktaki kartlarda butonlar aynı hizada durur. */}
+        <div className="card__links">
+          <SmartLink className="card__link" href={project.github}>
+            {t.projects.github}
+          </SmartLink>
+          <SmartLink className="card__link" href={project.demo}>
+            {t.projects.demo}
+          </SmartLink>
+        </div>
       </div>
     </article>
   );

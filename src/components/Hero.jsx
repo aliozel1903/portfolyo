@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { profile } from "../data/content";
 import { useLanguage } from "../context/LanguageContext";
 import SmartLink from "./SmartLink";
+import { GithubIcon, LinkedinIcon, MailIcon } from "./icons";
 import "./Hero.css";
 
 function Hero() {
@@ -19,13 +20,34 @@ function Hero() {
         <p className="hero__title">{t.hero.title}</p>
         <p className="hero__tagline">{t.hero.tagline}</p>
 
-        <div className="hero__actions">
-          {/* SmartLink: linki "#" ise tıklanamaz <span> basar */}
-          <SmartLink className="btn btn--primary" href={profile.github}>
-            {t.hero.github}
+        {/* Yalnızca ikonlar — metin yok. Ekran okuyucu için
+           aria-label taşıyorlar. */}
+        <div className="hero__social">
+          <SmartLink
+            className="social"
+            href={profile.github}
+            aria-label="GitHub"
+            title="GitHub"
+          >
+            <GithubIcon size={26} />
           </SmartLink>
-          <SmartLink className="btn btn--outline" href={profile.linkedin}>
-            {t.hero.linkedin}
+          <SmartLink
+            className="social"
+            href={profile.linkedin}
+            aria-label="LinkedIn"
+            title="LinkedIn"
+          >
+            <LinkedinIcon size={26} />
+          </SmartLink>
+          {/* E-posta ekranda düz metin olarak yazılmıyor; adres
+             yalnızca href içindeki mailto: hedefinde yaşıyor. */}
+          <SmartLink
+            className="social"
+            href={profile.email === "#" ? "#" : `mailto:${profile.email}`}
+            aria-label="E-mail"
+            title="E-mail"
+          >
+            <MailIcon size={26} />
           </SmartLink>
         </div>
       </div>

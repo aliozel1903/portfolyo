@@ -18,7 +18,6 @@ function Navbar() {
     { href: "#skills", label: t.sections.skills },
     { href: "#projects", label: t.sections.projects },
     { href: "#experience", label: t.sections.experience },
-    { href: "#contact", label: t.sections.contact },
   ];
 
   return (

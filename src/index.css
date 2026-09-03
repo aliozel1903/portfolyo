@@ -13,9 +13,9 @@
      Apple'ın dili: nötr griler, tek bir renk vurgusu yok.
      Karanlık tema aşağıda aynı isimlere yeni değer veriyor;
      bileşen dosyalarında tek bir renk kodu yok. */
-  --color-bg: #ffffff;
-  --color-surface: #f5f5f7;      /* gri şeritler, rozet zeminleri */
-  --color-card: #ffffff;         /* proje kartlarının zemini */
+  --color-bg: #f5f5f7;           /* Apple grisi — sayfa zemini */
+  --color-surface: #ebebed;      /* zeminden bir ton koyu yüzeyler */
+  --color-card: #fbfbfd;         /* kartlar: zeminden bir ton AÇIK */
   --color-border: #d2d2d7;
   --color-text: #1d1d1f;         /* başlıklar, ana metin */
   --color-text-muted: #6e6e73;   /* tarih, açıklama, ikincil metin */
@@ -26,7 +26,7 @@
   --color-nav-bg: rgba(255, 255, 255, 0.72);      /* cam efektli menü */
 
   /* Terminal yeşili — yalnızca hero'daki isim satırında kullanılır */
-  --color-terminal: #00ff41;
+  --color-terminal: #34c759;   /* Apple sistem yeşili — mat ve pastel */
 
   /* Ölçek — boşlukları göz kararı değil, sabit bir merdivenden seçeriz */
   --space-xs: 0.5rem;
@@ -35,8 +35,14 @@
   --space-lg: 2rem;
   --space-xl: 4rem;
 
-  --radius: 8px;
+  --radius: 12px;
+  --radius-lg: 18px;
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  /* Yayvan ve çok yumuşak: kartı zeminden "kaldıran" gölge */
+  --shadow-card:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 8px 24px rgba(0, 0, 0, 0.06),
+    0 24px 60px rgba(0, 0, 0, 0.05);
 
   /* Sayfanın en geniş hali. Metin satırları çok uzayınca okunmaz olur. */
   --container-width: 900px;
@@ -114,14 +120,12 @@ ul {
 
 /* .section: dikey nefes payı. Bölümler arasındaki ritmi bu belirler. */
 .section {
-  padding: var(--space-xl) var(--space-md);
+  /* Ayırıcı çizgi olmadığı için ritmi tamamen bu boşluk kuruyor */
+  padding: calc(var(--space-xl) * 1.15) var(--space-md);
 }
 
-/* Bir bölümü gri zeminle ayırmak istersek: <section className="section section--alt"> */
-.section--alt {
-  background-color: var(--color-surface);
-  border-block: 1px solid var(--color-border);
-}
+/* NOT: Bölüm ayırıcı çizgi veya gri şerit YOK.
+   Bölümler arası geçişi yalnızca boşluk sağlıyor. */
 
 /* .container: içeriği ortalar ve genişliğini sınırlar. */
 .container {
@@ -130,11 +134,10 @@ ul {
   margin-inline: auto;
 }
 
-/* Bölüm başlıklarının altındaki ince çizgi — sayfaya düzen hissi verir */
+/* Bölüm başlığı — altında çizgi yok; ayrımı boşluk yapıyor. */
 .section-title {
   margin-bottom: var(--space-lg);
-  padding-bottom: var(--space-xs);
-  border-bottom: 1px solid var(--color-border);
+  letter-spacing: -0.4px;
 }
 
 /* Sticky navbar, #projects gibi bir linke atlandığında bölüm
@@ -149,17 +152,22 @@ ul {
    yeniden tanımlanır. Tek bir bileşen dosyasına dokunulmuyor.
    ============================================================ */
 :root[data-theme="dark"] {
-  --color-bg: #000000;           /* Apple'ın koyu modu: tam siyah */
-  --color-surface: #1d1d1f;      /* şeritler ve kartlar bir ton açık */
-  --color-card: #1d1d1f;
+  --color-bg: #1d1d1f;           /* Apple'ın derin grisi */
+  --color-surface: #161617;      /* zeminden bir ton koyu yüzeyler */
+  --color-card: #2c2c2e;         /* kartlar: zeminden bir ton AÇIK */
   --color-border: #2c2c2e;
-  --color-text: #f5f5f7;         /* keskin beyaz */
+  --color-text: #f5f5f7;         /* kırık beyaz — saf beyaz değil */
   --color-text-muted: #86868b;   /* Apple'ın ikincil gri tonu */
   --color-accent: #f5f5f7;       /* vurgu nötr: açık üzerine koyu */
   --color-accent-hover: #ffffff;
   --color-on-accent: #000000;
   --color-accent-glow: rgba(255, 255, 255, 0.10);
-  --color-nav-bg: rgba(0, 0, 0, 0.72);
+  --color-nav-bg: rgba(29, 29, 31, 0.72);
+  /* Koyu zeminde gölge daha derin olmalı, yoksa görünmez */
+  --shadow-card:
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 8px 24px rgba(0, 0, 0, 0.35),
+    0 24px 60px rgba(0, 0, 0, 0.3);
 
   /* Tarayıcının kendi arayüzü de (kaydırma çubuğu, form
      elemanları, seçim rengi) koyu moda geçsin. */

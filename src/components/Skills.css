@@ -1,3 +1,12 @@
+/* Kağıt yüzey: zeminden bir ton açık, köşeleri hafif yuvarlak,
+   gölgesi geniş ve yumuşak — sert kenar veya çerçeve yok. */
+.skills__paper {
+  padding: var(--space-lg);
+  background-color: var(--color-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
 /* Rozetler yan yana dizilir, sığmayınca alt satıra iner. */
 .skills__list {
   display: flex;
@@ -10,35 +19,26 @@
   font-size: 0.9375rem;
   font-weight: 500;
   color: var(--color-text);
-  background-color: var(--color-bg);
-  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
   border-radius: 999px;
 
   /* Hangi özelliklerin yumuşak geçeceğini tek tek yazıyoruz.
      "transition: all" yazmak tarayıcıyı gereksiz yere yorar. */
-  transition:
-    transform 0.18s ease,
-    border-color 0.18s ease,
-    box-shadow 0.18s ease,
-    color 0.18s ease;
+  transition: transform 0.18s ease, background-color 0.18s ease;
 }
 
-/* Üzerine gelince: hafifçe yükselir, kenarı ve yazısı maviye döner. */
+/* Üzerine gelince yalnızca hafifçe yükselir — gürültü yok. */
 .skills__badge:hover {
-  transform: translateY(-3px);
-  color: var(--color-accent);
-  border-color: var(--color-accent);
-  box-shadow: 0 4px 12px var(--color-accent-glow);
+  transform: translateY(-2px);
 }
 
 /* Hareketi rahatsız edici bulan kullanıcılar için (işletim sistemi
-   ayarından "hareketi azalt" seçenler): renk değişsin, zıplama olmasın. */
+   ayarından "hareketi azalt" seçenler). */
 @media (prefers-reduced-motion: reduce) {
   .skills__badge {
-    transition: border-color 0.18s ease, color 0.18s ease;
+    transition: background-color 0.18s ease;
   }
   .skills__badge:hover {
     transform: none;
-    box-shadow: none;
   }
 }
