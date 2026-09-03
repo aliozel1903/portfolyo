@@ -18,6 +18,10 @@ export function useSmoothScroll() {
       // Yumuşak duruş eğrisi: hızlı başlar, sona doğru yavaşlar
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
+      // Dokunmatikte araya girmiyoruz: mobilde tarayıcının kendi
+      // kaydırması (atalet dahil) daha akıcı ve harita animasyonu
+      // gerçek konumu her karede okuduğu için parmakla senkron kalıyor.
+      syncTouch: false,
       anchors: true,              // #projects gibi bağlantıları da Lenis taşısın
       respectReducedMotion: true, // "hareketi azalt" seçenlerde devre dışı
     });
