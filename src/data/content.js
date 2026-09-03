@@ -150,6 +150,11 @@ export const ui = {
       github: "GitHub",
       demo: "Canlı Demo",
     },
+    terminal: {
+      title: "aliozel — -zsh — 80×24",
+      intro: "Last login: on ttys000",
+      command: "cat skills.txt",
+    },
     experience: {
       work: "Deneyim",
       education: "Eğitim",
@@ -179,6 +184,11 @@ export const ui = {
     projects: {
       github: "GitHub",
       demo: "Live Demo",
+    },
+    terminal: {
+      title: "aliozel — -zsh — 80×24",
+      intro: "Last login: on ttys000",
+      command: "cat skills.txt",
     },
     experience: {
       work: "Experience",

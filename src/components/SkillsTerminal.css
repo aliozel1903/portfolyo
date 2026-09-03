@@ -1,0 +1,94 @@
+/* macOS terminal penceresi.
+   Renkleri BİLEREK token'a bağlamadık: terminal her iki temada da
+   aynı görünüyor. */
+.term {
+  --term-bar: #3a3a3c;
+  --term-bg: #1c1c1e;
+  --term-text: #e6e6e6;
+  --term-muted: #9a9a9e;
+  --term-green: var(--color-terminal);
+
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.16),
+    0 10px 24px rgba(15, 23, 42, 0.22),
+    0 30px 60px rgba(15, 23, 42, 0.20);
+}
+
+/* --- Başlık çubuğu --- */
+.term__bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background-color: var(--term-bar);
+}
+
+.term__light {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.2);
+}
+
+.term__light--red { background-color: #ff5f57; }
+.term__light--yellow { background-color: #febc2e; }
+.term__light--green { background-color: #28c840; }
+
+/* Başlık gerçek pencerelerdeki gibi ortalanır */
+.term__title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #d6d6d6;
+  white-space: nowrap;
+}
+
+/* --- Ekran --- */
+.term__screen {
+  margin: 0;
+  padding: var(--space-md);
+  min-height: 300px;          /* yazarken kutu büyüyüp zıplamasın */
+  background-color: var(--term-bg);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--term-text);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.term__line--muted { color: var(--term-muted); }
+.term__line--prompt { color: var(--term-text); }
+.term__line--out {
+  color: var(--term-green);
+  font-weight: 600;
+}
+
+/* İmleç: gerçek terminaldeki gibi dolu blok, keskin yanıp söner */
+.term__caret {
+  display: inline-block;
+  width: 8px;
+  height: 1.05em;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  background-color: var(--term-text);
+  animation: term-blink 1s steps(1) infinite;
+}
+
+@keyframes term-blink {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .term__caret { animation: none; }
+}
+
+@media (max-width: 560px) {
+  .term__title { display: none; }
+  .term__screen { font-size: 0.8125rem; }
+}
