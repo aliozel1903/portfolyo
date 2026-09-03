@@ -29,7 +29,7 @@ function Hero() {
             aria-label="GitHub"
             title="GitHub"
           >
-            <GithubIcon size={26} />
+            <GithubIcon size={39} />
           </SmartLink>
           <SmartLink
             className="social"
@@ -37,7 +37,7 @@ function Hero() {
             aria-label="LinkedIn"
             title="LinkedIn"
           >
-            <LinkedinIcon size={26} />
+            <LinkedinIcon size={39} />
           </SmartLink>
           {/* E-posta ekranda düz metin olarak yazılmıyor; adres
              yalnızca href içindeki mailto: hedefinde yaşıyor. */}
@@ -47,7 +47,7 @@ function Hero() {
             aria-label="E-mail"
             title="E-mail"
           >
-            <MailIcon size={26} />
+            <MailIcon size={39} />
           </SmartLink>
         </div>
       </div>

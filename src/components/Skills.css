@@ -1,10 +1,15 @@
-/* Kağıt yüzey: zeminden bir ton açık, köşeleri hafif yuvarlak,
-   gölgesi geniş ve yumuşak — sert kenar veya çerçeve yok. */
+/* Kağıt yüzey.
+   Renkleri BİLEREK token'a bağlamadık: kart her iki temada da
+   aynı kırık beyaz tonunu koruyor. */
 .skills__paper {
+  --paper-bg: #f7f8fa;
+  --paper-chip: #e4e6eb;
+  --paper-text: #1d1d1f;
+
   position: relative;        /* yağmur bu kutuya göre konumlanır */
   overflow: hidden;
   padding: var(--space-lg);
-  background-color: var(--color-card);
+  background-color: var(--paper-bg);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
 }
@@ -23,8 +28,8 @@
   backdrop-filter: blur(2px);   /* arkadaki yağmur yazıyı bozmasın */
   font-size: 0.9375rem;
   font-weight: 500;
-  color: var(--color-text);
-  background-color: var(--color-surface);
+  color: var(--paper-text);
+  background-color: var(--paper-chip);
   border-radius: 999px;
 
   /* Hangi özelliklerin yumuşak geçeceğini tek tek yazıyoruz.

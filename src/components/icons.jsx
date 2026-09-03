@@ -70,3 +70,54 @@ export function MoonIcon() {
     </svg>
   );
 }
+
+/* Breaking Bad karavanı (Fleetwood Bounder) — yolda duran dekor.
+   Hareketsiz; tek işi haritaya bir hikâye katmak. */
+export function RvIcon() {
+  return (
+    <svg width="76" height="44" viewBox="0 0 76 44" aria-hidden="true">
+      {/* gövde */}
+      <rect x="4" y="10" width="60" height="22" rx="3" fill="#e8e2d4" />
+      {/* kabin (öne doğru alçalan burun) */}
+      <path d="M64 16h6l2 6v10h-8z" fill="#dcd5c4" />
+      {/* çizgiler — orijinal karavanın kahverengi bantları */}
+      <rect x="4" y="24" width="60" height="3" fill="#8a6a3f" />
+      <rect x="4" y="28" width="60" height="1.5" fill="#b08d55" />
+      {/* pencereler */}
+      <rect x="9" y="14" width="14" height="7" rx="1" fill="#9fb4c7" />
+      <rect x="27" y="14" width="10" height="7" rx="1" fill="#9fb4c7" />
+      <rect x="66" y="17" width="6" height="6" rx="1" fill="#9fb4c7" />
+      {/* kapı */}
+      <rect x="43" y="13" width="9" height="19" rx="1" fill="#d3ccbb" />
+      {/* tekerlekler */}
+      <circle cx="19" cy="34" r="6" fill="#1f2937" />
+      <circle cx="19" cy="34" r="2.4" fill="#9ca3af" />
+      <circle cx="60" cy="34" r="6" fill="#1f2937" />
+      <circle cx="60" cy="34" r="2.4" fill="#9ca3af" />
+    </svg>
+  );
+}
+
+/* Soru işaretli bayrak — yolun sonundaki bilinmeyen durak. */
+export function FlagIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+      {/* direk */}
+      <path d="M6 3v18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      {/* bayrak */}
+      <path d="M6 4h12l-2.5 4L18 12H6z" fill="currentColor" />
+      {/* soru işareti */}
+      <text
+        x="11"
+        y="10.4"
+        textAnchor="middle"
+        fontSize="7"
+        fontWeight="700"
+        fill="#0f172a"
+        fontFamily="ui-monospace, Menlo, monospace"
+      >
+        ?
+      </text>
+    </svg>
+  );
+}

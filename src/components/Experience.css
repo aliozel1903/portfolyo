@@ -2,7 +2,7 @@
    Yükseklik sabit: yol ve durak yüzdeleri buna göre hesaplanıyor. */
 .map {
   position: relative;
-  height: 620px;
+  height: 720px;
 }
 
 .map__path {
@@ -12,7 +12,7 @@
   height: 100%;
 }
 
-/* Yolun gövdesi — kalın, yumuşak uçlu, soluk */
+/* Yolun gövdesi — kalın, yumuşak uçlu */
 .map__road {
   fill: none;
   stroke: var(--color-surface);
@@ -27,7 +27,18 @@
   stroke-width: 2;
   stroke-linecap: round;
   stroke-dasharray: 7 11;
-  opacity: 0.85;
+  opacity: 0.75;
+}
+
+/* Karavan: iki durak arasında, yolun üstünde duruyor.
+   Konum yüzde olduğu için harita esnese de yolda kalıyor. */
+.map__rv {
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  transform: translate(-50%, -50%) rotate(-14deg);
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.35));
+  pointer-events: none;
 }
 
 /* --- Duraklar --- */
@@ -39,11 +50,24 @@
 
 .stop {
   position: absolute;
-  /* Konum noktası dairenin merkezine denk gelsin */
-  transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
   gap: var(--space-sm);
+  /* Metin kutusu, yolun geçtiği orta bandı asla kaplamasın */
+  max-width: 300px;
+}
+
+/* Yazı sola açılan duraklar: kutu düğümün soluna kayar.
+   22px = düğüm yarıçapı, yani daire tam noktanın üstünde kalır. */
+.stop--left {
+  flex-direction: row-reverse;
+  text-align: right;
+  transform: translate(calc(-100% + 22px), -50%);
+}
+
+/* Yazı sağa açılan duraklar */
+.stop--right {
+  transform: translate(-22px, -50%);
 }
 
 /* Yol üzerindeki yuvarlak durak işareti */
@@ -64,15 +88,14 @@
   box-shadow: 0 0 0 6px var(--color-bg), var(--shadow-card);
 }
 
-/* Son durak: henüz tamamlanmadı — içi boş, kenarı vurgulu */
-.stop--current .stop__node {
+/* Son durak — henüz bilinmiyor: içi boş, kenarı vurgulu */
+.stop--next .stop__node {
   color: var(--color-terminal);
   background-color: var(--color-card);
   box-shadow: 0 0 0 2px var(--color-terminal) inset,
     0 0 0 6px var(--color-bg), var(--shadow-card);
 }
 
-/* Durak bilgisi */
 .stop__card {
   min-width: 0;
 }
@@ -104,21 +127,16 @@
   margin-top: 2px;
 }
 
-/* Sağ taraftaki durak, kartını soluna alsın ki ekran dışına taşmasın */
-.map__stops .stop:nth-child(2) {
-  flex-direction: row-reverse;
-  text-align: right;
-}
-
 /* --- Dar ekran ---
    Kıvrımlı yol dar ekranda okunmaz hale gelir; haritayı düz bir
-   dikey sıraya çeviriyoruz. Yol SVG'si gizleniyor. */
-@media (max-width: 700px) {
+   dikey sıraya çeviriyoruz. Yol ve karavan gizleniyor. */
+@media (max-width: 760px) {
   .map {
     height: auto;
   }
 
-  .map__path {
+  .map__path,
+  .map__rv {
     display: none;
   }
 
@@ -130,11 +148,13 @@
   }
 
   .stop,
-  .map__stops .stop:nth-child(2) {
+  .stop--left,
+  .stop--right {
     position: static;
     transform: none;
     flex-direction: row;
     text-align: left;
+    max-width: none;
   }
 
   .stop__node {

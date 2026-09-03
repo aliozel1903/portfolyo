@@ -93,28 +93,42 @@ export const projects = [
   },
 ];
 
-/* Kurum adları çevrilmez; sadece pozisyon ve tarih dile bağlı. */
+/* Kurum adları da dile bağlı: İngilizce görünümde şirket ve okul
+   adlarının Türkçe kalması yarım çeviri hissi veriyordu. */
 export const experience = [
   {
     id: "uludag-bilisim",
-    organization: "Uludağ Bilişim",
-    tr: { role: "Yazılım Stajyeri", period: "22 Haziran 2026 - 21 Temmuz 2026" },
-    en: { role: "Software Intern", period: "22 June 2026 - 21 July 2026" },
+    tr: {
+      role: "Yazılım Stajyeri",
+      org: "Uludağ Bilişim",
+      period: "22 Haziran 2026 - 21 Temmuz 2026",
+    },
+    en: {
+      role: "Software Intern",
+      org: "Uludağ Bilişim",
+      period: "22 June 2026 - 21 July 2026",
+    },
   },
   {
     id: "sanko",
-    organization: "SANKO Tekstil İşletmeleri - İSKO Şubesi",
-    tr: { role: "IT Stajyeri", period: "30 Haziran 2025 - 29 Temmuz 2025" },
-    en: { role: "IT Intern", period: "30 June 2025 - 29 July 2025" },
+    tr: {
+      role: "IT Stajyeri",
+      org: "SANKO Tekstil İşletmeleri - İSKO Şubesi",
+      period: "30 Haziran 2025 - 29 Temmuz 2025",
+    },
+    en: {
+      role: "IT Intern",
+      org: "SANKO Textile Enterprises - İSKO Branch",
+      period: "30 June 2025 - 29 July 2025",
+    },
   },
 ];
 
 export const education = [
   {
     id: "selcuk",
-    school: "Selçuk Üniversitesi",
-    tr: { program: "Bilgisayar Mühendisliği" },
-    en: { program: "Computer Engineering" },
+    tr: { program: "Bilgisayar Mühendisliği", org: "Selçuk Üniversitesi" },
+    en: { program: "Computer Engineering", org: "Selçuk University" },
   },
 ];
 
@@ -139,6 +153,7 @@ export const ui = {
     experience: {
       work: "Deneyim",
       education: "Eğitim",
+      next: "Sırada ne var?",
     },
     sections: {
       skills: "Yetenekler",
@@ -169,6 +184,7 @@ export const ui = {
     experience: {
       work: "Experience",
       education: "Education",
+      next: "What's next?",
     },
     sections: {
       skills: "Skills",

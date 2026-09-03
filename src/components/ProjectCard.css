@@ -2,11 +2,11 @@
    Renkleri BİLEREK token'a bağlamadık: kartlar bir kod editörü
    penceresi gibi her iki temada da aynı kalıyor. */
 .card {
-  --win-bg: #1e1f22;
-  --win-bar: #2a2c30;
-  --win-text: #e8eaed;
-  --win-muted: #9aa0a6;
-  --win-chip: #2f3237;
+  --win-bg: #f7f8fa;
+  --win-bar: #e9ebef;
+  --win-text: #1d1d1f;
+  --win-muted: #6b7280;
+  --win-chip: #e4e6eb;
 
   display: flex;
   flex-direction: column;
@@ -109,8 +109,8 @@
 
 .card__link:hover {
   text-decoration: none;
-  color: #1e1f22;
-  background-color: #e8eaed;
+  color: #f7f8fa;
+  background-color: #1d1d1f;
 }
 
 /* Linki henüz hazır olmayan buton: soluk ve tıklanamaz. */
