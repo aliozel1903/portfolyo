@@ -22,6 +22,10 @@ export function useSmoothScroll() {
       respectReducedMotion: true, // "hareketi azalt" seçenlerde devre dışı
     });
 
+    // Geliştirme sırasında konsoldan kaydırmayı sürebilmek için.
+    // Üretim derlemesinde bu satır tamamen çıkarılır.
+    if (import.meta.env.DEV) window.__lenis = lenis;
+
     // Lenis'i tarayıcının çizim döngüsüne bağlıyoruz: her karede
     // bir adım ilerlesin, ekran yenilemesiyle senkron kalsın.
     let frame = 0;

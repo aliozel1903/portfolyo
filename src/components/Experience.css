@@ -1,8 +1,27 @@
-/* --- Harita alanı ---
-   Yükseklik sabit: yol ve durak yüzdeleri buna göre hesaplanıyor. */
+/* --- Kaydırmaya bağlı harita ---
+   Bölüm bilerek uzun: kaydırma "yolu" bu yükseklikten geliyor.
+   İçindeki kutu sticky ile ekrana yapışıyor; bölüm bitince
+   yapışma kendiliğinden çözülüyor ve sayfa normal akışına dönüyor. */
+.experience {
+  height: 300vh;
+  padding-block: 0;
+}
+
+.experience__pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: var(--space-lg);
+}
+
+/* --- Harita alanı --- */
 .map {
   position: relative;
-  height: 560px;
+  /* Ekran yüksekliğine göre: yapışkan kutunun içinde taşmasın */
+  height: min(560px, 68vh);
 }
 
 .map__path {
@@ -20,21 +39,24 @@
   stroke-linecap: round;
 }
 
-/* Şerit işareti — yolun ortasında kesik çizgi */
-.map__dashes {
+/* Ortadaki şerit çizgisi */
+.map__lane {
   fill: none;
   stroke: var(--color-terminal);
   stroke-width: 2;
   stroke-linecap: round;
-  stroke-dasharray: 7 11;
-  opacity: 0.75;
+  opacity: 0.8;
 }
 
 /* --- Duraklar --- */
 .map__stops {
+  list-style: none;
+}
+
+/* Haritada duraklar mutlak konumda; dar ekran listesinde değil. */
+.map__stops--absolute {
   position: absolute;
   inset: 0;
-  list-style: none;
 }
 
 .stop {
@@ -111,25 +133,16 @@
 /* --- Dar ekran ---
    Kıvrımlı yol dar ekranda okunmaz hale gelir; haritayı düz bir
    dikey sıraya çeviriyoruz. Yol ve karavan gizleniyor. */
+/* Dar ekran / hareketi azalt: harita düz listeye dönüşür.
+   (Bileşen bu durumda zaten mutlak konumlu sürümü basmıyor.) */
 @media (max-width: 760px) {
-  .map {
-    height: auto;
-  }
-
-  .map__path {
-    display: none;
-  }
-
   .map__stops {
-    position: static;
     display: flex;
     flex-direction: column;
     gap: var(--space-lg);
   }
 
-  .stop,
-  .stop--left,
-  .stop--right {
+  .stop {
     position: static;
     transform: none;
     flex-direction: row;

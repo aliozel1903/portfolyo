@@ -1,12 +1,14 @@
 /* macOS penceresi.
-   Renkleri BİLEREK token'a bağlamadık: kartlar bir kod editörü
-   penceresi gibi her iki temada da aynı kalıyor. */
+   Renkler pencereye özel değişkenlerde: açık temada kırık beyaz,
+   koyu temada slate. Böylece kart, sayfanın geri kalanından
+   bağımsız olarak kendi "pencere" kimliğini koruyor. */
 .card {
   --win-bg: #f7f8fa;
   --win-bar: #e9ebef;
   --win-text: #1d1d1f;
   --win-muted: #6b7280;
   --win-chip: #e4e6eb;
+  --win-shadow: rgba(15, 23, 42, 0.14);
 
   display: flex;
   flex-direction: column;
@@ -16,23 +18,33 @@
   color: var(--win-text);
   border-radius: var(--radius);
   overflow: hidden;          /* başlık çubuğu köşeleri taşmasın */
-  /* Kartlar kırık beyaz olduğu için açık zeminde kaybolmasınlar:
-     yakın-sıkı + orta + yayvan üç katmanlı, belirgin gölge. */
+  /* Üç katmanlı gölge: yakın-sıkı + orta + yayvan.
+     Rengi değişkenden geliyor; koyu temada daha derin oluyor. */
   box-shadow:
-    0 1px 2px rgba(15, 23, 42, 0.10),
-    0 6px 14px rgba(15, 23, 42, 0.12),
-    0 18px 40px rgba(15, 23, 42, 0.14),
-    0 40px 80px rgba(15, 23, 42, 0.10);
+    0 1px 2px var(--win-shadow),
+    0 6px 14px var(--win-shadow),
+    0 18px 40px var(--win-shadow);
   transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
 
 .card:hover {
   transform: translateY(-3px);
   box-shadow:
-    0 2px 4px rgba(15, 23, 42, 0.12),
-    0 10px 22px rgba(15, 23, 42, 0.16),
-    0 26px 56px rgba(15, 23, 42, 0.18),
-    0 50px 100px rgba(15, 23, 42, 0.12);
+    0 2px 4px var(--win-shadow),
+    0 12px 26px var(--win-shadow),
+    0 30px 64px var(--win-shadow);
+}
+
+/* --- Koyu tema ---
+   Gövde ana zeminden (#0f172a) bir tık açık slate; başlık çubuğu
+   ise gövdeden bir tık KOYU. Bu ince fark pencereye derinlik veriyor. */
+:root[data-theme="dark"] .card {
+  --win-bg: #1e293b;
+  --win-bar: #172033;
+  --win-text: #e2e8f0;
+  --win-muted: #94a3b8;
+  --win-chip: #2b3a52;
+  --win-shadow: rgba(0, 0, 0, 0.35);
 }
 
 /* --- Pencere başlık çubuğu --- */
@@ -116,8 +128,8 @@
 
 .card__link:hover {
   text-decoration: none;
-  color: #f7f8fa;
-  background-color: #1d1d1f;
+  color: var(--win-bg);
+  background-color: var(--win-text);
 }
 
 /* Linki henüz hazır olmayan buton: soluk ve tıklanamaz. */
