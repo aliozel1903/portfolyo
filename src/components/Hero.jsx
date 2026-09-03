@@ -61,7 +61,7 @@ function Hero() {
    Kurulum: her karakterden sonra bir sonraki için zamanlayıcı
    kuruluyor. setInterval yerine zincirleme setTimeout kullanmak,
    bileşen kapanınca tek bir temizlikle durdurmayı kolaylaştırıyor. */
-function Typewriter({ text, speed = 110 }) {
+function Typewriter({ text, speed = 165 }) {   // 110ms → 165ms (1.5 kat yavaş)
   const [count, setCount] = useState(0);
 
   useEffect(() => {

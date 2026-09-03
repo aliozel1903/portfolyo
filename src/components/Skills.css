@@ -1,6 +1,8 @@
 /* Kağıt yüzey: zeminden bir ton açık, köşeleri hafif yuvarlak,
    gölgesi geniş ve yumuşak — sert kenar veya çerçeve yok. */
 .skills__paper {
+  position: relative;        /* yağmur bu kutuya göre konumlanır */
+  overflow: hidden;
   padding: var(--space-lg);
   background-color: var(--color-card);
   border-radius: var(--radius-lg);
@@ -9,6 +11,8 @@
 
 /* Rozetler yan yana dizilir, sığmayınca alt satıra iner. */
 .skills__list {
+  position: relative;        /* yağmurun üstünde kalsın */
+  z-index: 1;
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-sm);
@@ -16,6 +20,7 @@
 
 .skills__badge {
   padding: 8px 18px;
+  backdrop-filter: blur(2px);   /* arkadaki yağmur yazıyı bozmasın */
   font-size: 0.9375rem;
   font-weight: 500;
   color: var(--color-text);

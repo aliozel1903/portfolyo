@@ -3,6 +3,7 @@
 
 import { skills } from "../data/content";
 import { useLanguage } from "../context/LanguageContext";
+import MatrixRain from "./MatrixRain";
 import "./Skills.css";
 
 function Skills() {
@@ -16,6 +17,9 @@ function Skills() {
         {/* Masaya bırakılmış bir kağıt: zeminden hafifçe yükselen,
            yayvan gölgeli geniş kart. */}
         <div className="skills__paper">
+          {/* Kartın arkasında akan dijital yağmur */}
+          <MatrixRain />
+
           {/* Görsel olarak rozet dizisi ama yapısal olarak bir LİSTE.
               <ul> kullanmak ekran okuyucuya "6 öğelik liste" der;
               arka arkaya <span> yığını bunu söyleyemez. */}

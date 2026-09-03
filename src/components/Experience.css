@@ -1,82 +1,146 @@
-/* Minimal dikey zaman çizelgesi:
-   solda ince bir çizgi, üzerinde küçük noktalar. Kutu, çerçeve
-   veya ayırıcı yok — hiyerarşiyi tipografi ve boşluk kuruyor. */
+/* --- Harita alanı ---
+   Yükseklik sabit: yol ve durak yüzdeleri buna göre hesaplanıyor. */
+.map {
+  position: relative;
+  height: 620px;
+}
 
-.timeline__heading {
-  font-size: 0.75rem;
-  font-weight: 600;
+.map__path {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Yolun gövdesi — kalın, yumuşak uçlu, soluk */
+.map__road {
+  fill: none;
+  stroke: var(--color-surface);
+  stroke-width: 16;
+  stroke-linecap: round;
+}
+
+/* Şerit işareti — yolun ortasında kesik çizgi */
+.map__dashes {
+  fill: none;
+  stroke: var(--color-terminal);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 7 11;
+  opacity: 0.85;
+}
+
+/* --- Duraklar --- */
+.map__stops {
+  position: absolute;
+  inset: 0;
+  list-style: none;
+}
+
+.stop {
+  position: absolute;
+  /* Konum noktası dairenin merkezine denk gelsin */
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+/* Yol üzerindeki yuvarlak durak işareti */
+.stop__node {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: var(--color-terminal);
+  /* Zemin renginde halka: durak yolun üstünde duruyormuş gibi görünür */
+  box-shadow: 0 0 0 6px var(--color-bg), var(--shadow-card);
+}
+
+/* Son durak: henüz tamamlanmadı — içi boş, kenarı vurgulu */
+.stop--current .stop__node {
+  color: var(--color-terminal);
+  background-color: var(--color-card);
+  box-shadow: 0 0 0 2px var(--color-terminal) inset,
+    0 0 0 6px var(--color-bg), var(--shadow-card);
+}
+
+/* Durak bilgisi */
+.stop__card {
+  min-width: 0;
+}
+
+.stop__kind {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.6px;
   color: var(--color-text-muted);
-  margin-bottom: var(--space-md);
-}
-
-/* İkinci başlık ("Eğitim") kendinden önceki listeden ayrılsın */
-.timeline + .timeline__heading {
-  margin-top: var(--space-lg);
-}
-
-.timeline {
-  position: relative;
-  padding-left: var(--space-md);
-}
-
-/* Dikey çizgi: border yerine ::before — böylece uçlarını
-   yumuşatabiliyoruz (üstte ve altta silinerek biter). */
-.timeline::before {
-  content: "";
-  position: absolute;
-  top: 6px;
-  bottom: 6px;
-  left: 0;
-  width: 1px;
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    var(--color-border) 12%,
-    var(--color-border) 88%,
-    transparent
-  );
-}
-
-.timeline__item {
-  position: relative;      /* noktanın konumlanacağı referans */
-  padding-bottom: var(--space-lg);
-}
-
-.timeline__item:last-child {
-  padding-bottom: 0;
-}
-
-/* Çizginin üzerindeki nokta. İçerik değil, süs olduğu için
-   ::before ile çiziliyor — HTML'de karşılığı yok. */
-.timeline__item::before {
-  content: "";
-  position: absolute;
-  left: calc(var(--space-md) * -1 - 2.5px);
-  top: 8px;
-  width: 6px;
-  height: 6px;
-  background-color: var(--color-text-muted);
-  border-radius: 50%;
-  /* Zeminle aynı renkte halka: nokta çizgiyi keser gibi görünür */
-  box-shadow: 0 0 0 4px var(--color-bg);
-}
-
-.timeline__title {
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: -0.2px;
   margin-bottom: 2px;
 }
 
-.timeline__org {
+.stop__title {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+.stop__org {
   font-size: 0.9375rem;
   color: var(--color-text);
 }
 
-.timeline__period {
+.stop__period {
   font-size: 0.8125rem;
   color: var(--color-text-muted);
-  margin-top: 3px;
+  margin-top: 2px;
+}
+
+/* Sağ taraftaki durak, kartını soluna alsın ki ekran dışına taşmasın */
+.map__stops .stop:nth-child(2) {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+/* --- Dar ekran ---
+   Kıvrımlı yol dar ekranda okunmaz hale gelir; haritayı düz bir
+   dikey sıraya çeviriyoruz. Yol SVG'si gizleniyor. */
+@media (max-width: 700px) {
+  .map {
+    height: auto;
+  }
+
+  .map__path {
+    display: none;
+  }
+
+  .map__stops {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .stop,
+  .map__stops .stop:nth-child(2) {
+    position: static;
+    transform: none;
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .stop__node {
+    width: 38px;
+    height: 38px;
+    font-size: 0.875rem;
+    box-shadow: var(--shadow-card);
+  }
 }
