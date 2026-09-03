@@ -26,7 +26,7 @@
   --color-nav-bg: rgba(255, 255, 255, 0.72);      /* cam efektli menü */
 
   /* Terminal yeşili — yalnızca hero'daki isim satırında kullanılır */
-  --color-terminal: #6a9955;   /* kaktüs yeşili */
+  --color-terminal: #00e000;   /* klasik komut istemi yeşili */
 
   /* Ölçek — boşlukları göz kararı değil, sabit bir merdivenden seçeriz */
   --space-xs: 0.5rem;
