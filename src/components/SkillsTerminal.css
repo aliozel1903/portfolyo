@@ -6,7 +6,9 @@
   --term-bg: #1c1c1e;
   --term-text: #e6e6e6;
   --term-muted: #9a9a9e;
-  --term-green: var(--color-terminal);
+  /* Pencere her temada siyah olduğu için çıktı rengi de sabit:
+     koyu yeşil siyah zeminde okunmazdı. */
+  --term-green: #00e000;
 
   border-radius: 10px;
   overflow: hidden;
