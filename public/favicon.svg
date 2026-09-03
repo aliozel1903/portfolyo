@@ -1,11 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
   <!-- Koyu zemin: ikon hem açık hem koyu sekme çubuğunda okunsun -->
   <rect width="64" height="64" rx="14" fill="#0f172a"/>
-  <!-- ">_<" — yazı tipi yerine çizgilerle, her platformda birebir aynı görünsün -->
-  <g fill="none" stroke="#00e000" stroke-width="5"
+  <!-- ">_<" — yazı tipiyle değil çizgiyle, ama tipografiye yakın
+       oranlarda: ince kalem, dar chevron açısı, kenarlarda nefes payı.
+       Üç karakter monospace gibi eşit hücrelere oturuyor. -->
+  <g fill="none" stroke="#00e000" stroke-width="3.2"
      stroke-linecap="round" stroke-linejoin="round">
-    <path d="M15 20 L25 32 L15 44"/>
-    <path d="M27 43 L37 43"/>
-    <path d="M49 20 L39 32 L49 44"/>
+    <path d="M18 25 L24.5 32 L18 39"/>
+    <path d="M27.5 39.5 L36.5 39.5"/>
+    <path d="M46 25 L39.5 32 L46 39"/>
   </g>
 </svg>
