@@ -16,9 +16,9 @@ export const profile = {
   name: "Ali Özel",
   github: "https://github.com/aliozel1903",
   linkedin: "https://www.linkedin.com/in/ali-ozel-dev",
-  // Ekranda düz metin olarak GÖSTERİLMEZ; yalnızca Footer'daki
-  // ikonun mailto: adresini üretmek için kullanılır.
-  email: "aliozel1025@gmail.com",
+  // Ekranda düz metin olarak GÖSTERİLMEZ; yalnızca Hero'daki
+  // ikonun mailto: hedefini üretmek için kullanılır.
+  email: "hello@aliozel.dev",
 };
 
 export const skills = [
