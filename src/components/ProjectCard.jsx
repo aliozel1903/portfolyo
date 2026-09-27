@@ -8,12 +8,20 @@ import { useLanguage } from "../context/LanguageContext";
 import SmartLink from "./SmartLink";
 import "./ProjectCard.css";
 
+/* Bir bağlantı gerçekten var mı? "#" ve boş değer "henüz yok" demek. */
+const hasLink = (url) => Boolean(url) && url !== "#";
+
 // { project } = gelen prop'ların içinden sadece "project" alanını al.
 function ProjectCard({ project }) {
   const { lang, t } = useLanguage();
 
   // Başlık ve açıklama dile bağlı: project.tr.title / project.en.title
   const text = project[lang];
+
+  // Her projenin demosu olmayacak (masaüstü uygulaması, model vb.).
+  // Olmayan butonu pasif göstermek yerine hiç basmıyoruz.
+  const showGithub = hasLink(project.github);
+  const showDemo = hasLink(project.demo);
 
   return (
     <article className="card">
@@ -40,14 +48,20 @@ function ProjectCard({ project }) {
 
         {/* margin-top: auto ile bu blok kartın en altına yapışır;
            farklı uzunluktaki kartlarda butonlar aynı hizada durur. */}
-        <div className="card__links">
-          <SmartLink className="card__link" href={project.github}>
-            {t.projects.github}
-          </SmartLink>
-          <SmartLink className="card__link" href={project.demo}>
-            {t.projects.demo}
-          </SmartLink>
-        </div>
+        {(showGithub || showDemo) && (
+          <div className="card__links">
+            {showGithub && (
+              <SmartLink className="card__link" href={project.github}>
+                {t.projects.github}
+              </SmartLink>
+            )}
+            {showDemo && (
+              <SmartLink className="card__link" href={project.demo}>
+                {t.projects.demo}
+              </SmartLink>
+            )}
+          </div>
+        )}
       </div>
     </article>
   );

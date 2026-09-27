@@ -64,17 +64,17 @@ export const projects = [
     },
   },
   {
-    id: "eczacilik",
+    id: "saglik-ocagi",
     tech: ["C#", "Windows Forms"],
     github: "#",
     demo: "#",
     tr: {
-      title: "Eczacılık Yönetim Sistemi",
-      description: "Masaüstü eczane takip ve yönetim uygulaması.",
+      title: "Sağlık Ocağı Takip Sistemi",
+      description: "Masaüstü sağlık ocağı takip ve yönetim uygulaması.",
     },
     en: {
-      title: "Pharmacy Management System",
-      description: "Desktop application for pharmacy tracking and management.",
+      title: "Health Center Tracking System",
+      description: "Desktop application for health center tracking and management.",
     },
   },
   {

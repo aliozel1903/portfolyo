@@ -132,18 +132,6 @@
   background-color: var(--win-text);
 }
 
-/* Linki henüz hazır olmayan buton: soluk ve tıklanamaz. */
-.card__link.is-disabled {
-  color: var(--win-muted);
-  opacity: 0.55;
-  cursor: not-allowed;
-}
-
-.card__link.is-disabled:hover {
-  color: var(--win-muted);
-  background-color: var(--win-chip);
-}
-
 @media (prefers-reduced-motion: reduce) {
   .card,
   .card:hover {
