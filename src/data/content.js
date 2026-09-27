@@ -34,8 +34,58 @@ export const skills = [
    içine "tr" ve "en" alt objeleri koyduk. id, tech ve linkler ortak. */
 export const projects = [
   {
+    id: "lab-portal",
+    tech: ["Laravel 12", "PostgreSQL", "Vercel"],
+    github: "https://github.com/aliozel1903/lab-portal",
+    demo: "https://lab-portal-tau.vercel.app",
+    tr: {
+      title: "Lab Portal",
+      description:
+        "Laboratuvar tahlil sonuçlarının kaydedildiği ve hastaların kendi sonuçlarını sorgulayabildiği web uygulaması.",
+    },
+    en: {
+      title: "Lab Portal",
+      description:
+        "Web application where laboratory test results are recorded and patients can look up their own results.",
+    },
+  },
+  {
+    id: "sohats",
+    tech: ["C#", ".NET", "SQLite"],
+    github: "https://github.com/aliozel1903/hasta-takip-csharp",
+    demo: "#",
+    tr: {
+      title: "SOHATS — Sağlık Ocağı Hasta Takip Sistemi",
+      description:
+        "Rol bazlı yetkilendirme, hasta kabul ve poliklinik yönetimi içeren; OOP prensipleriyle MDI form yapısında geliştirilmiş masaüstü otomasyon.",
+    },
+    en: {
+      title: "SOHATS — Health Center Patient Tracking System",
+      description:
+        "Desktop automation with role-based access, patient admission and clinic management, built on OOP principles with an MDI form architecture.",
+    },
+  },
+  {
+    id: "stok-yonetim",
+    tech: ["Python", "Flask", "SQLite", "REST API"],
+    github: "https://github.com/aliozel1903/stok-yonetim-flask",
+    demo: "#",
+    tr: {
+      title: "Stok Yönetim Sistemi",
+      description:
+        "Stok giriş-çıkış takibi, hareket geçmişi, çöp kutusu ve raporlama sunan web tabanlı envanter yönetim uygulaması.",
+    },
+    en: {
+      title: "Inventory Management System",
+      description:
+        "Web-based inventory application with stock in/out tracking, movement history, soft delete and reporting.",
+    },
+  },
+  {
     id: "smartmenu",
     tech: ["C#", ".NET Core MVC", "Entity Framework Core", "PostgreSQL"],
+    // Henüz yayımlanmadı: linkler hazır olunca buraya yazılacak,
+    // butonlar kendiliğinden görünecek.
     github: "#",
     demo: "#",
     tr: {
@@ -50,45 +100,19 @@ export const projects = [
     },
   },
   {
-    id: "lbys",
-    tech: ["Laravel", "PostgreSQL"],
-    github: "#",
-    demo: "#",
-    tr: {
-      title: "LBYS (Laboratuvar Bilgi Yönetim Sistemi)",
-      description: "Gelişmiş laboratuvar süreç yönetimi altyapısı.",
-    },
-    en: {
-      title: "LIMS (Laboratory Information Management System)",
-      description: "Advanced infrastructure for laboratory process management.",
-    },
-  },
-  {
-    id: "saglik-ocagi",
-    tech: ["C#", "Windows Forms"],
-    github: "#",
-    demo: "#",
-    tr: {
-      title: "Sağlık Ocağı Takip Sistemi",
-      description: "Masaüstü sağlık ocağı takip ve yönetim uygulaması.",
-    },
-    en: {
-      title: "Health Center Tracking System",
-      description: "Desktop application for health center tracking and management.",
-    },
-  },
-  {
     id: "nlp",
-    tech: ["Python"],
-    github: "#",
+    tech: ["Python", "BERT", "Word2Vec", "TF-IDF"],
+    github: "https://github.com/aliozel1903/Turkish-News-Classification-NLP",
     demo: "#",
     tr: {
-      title: "Doğal Dil İşleme (NLP) Modeli",
-      description: "Metin analizi ve işleme projesi.",
+      title: "Türkçe Haber Sınıflandırma (NLP)",
+      description:
+        "Türkçe haber metinlerini ekonomi, spor ve teknoloji kategorilerine ayıran; BERT, Word2Vec ve TF-IDF modellerini karşılaştıran proje.",
     },
     en: {
-      title: "Natural Language Processing (NLP) Model",
-      description: "A text analysis and processing project.",
+      title: "Turkish News Classification (NLP)",
+      description:
+        "Classifies Turkish news into economy, sports and technology categories, comparing BERT, Word2Vec and TF-IDF models.",
     },
   },
 ];
