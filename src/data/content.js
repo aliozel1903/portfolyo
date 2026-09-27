@@ -55,12 +55,12 @@ export const projects = [
     github: "https://github.com/aliozel1903/hasta-takip-csharp",
     demo: "#",
     tr: {
-      title: "SOHATS — Sağlık Ocağı Hasta Takip Sistemi",
+      title: "Sağlık Ocağı Hasta Takip Sistemi",
       description:
         "Rol bazlı yetkilendirme, hasta kabul ve poliklinik yönetimi içeren; OOP prensipleriyle MDI form yapısında geliştirilmiş masaüstü otomasyon.",
     },
     en: {
-      title: "SOHATS — Health Center Patient Tracking System",
+      title: "Health Center Patient Tracking System",
       description:
         "Desktop automation with role-based access, patient admission and clinic management, built on OOP principles with an MDI form architecture.",
     },
