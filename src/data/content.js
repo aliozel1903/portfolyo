@@ -164,9 +164,9 @@ export const education = [
 export const ui = {
   tr: {
     hero: {
-      title: "Yazılım Geliştirici",
+      title: "Bilgisayar Mühendisi",
       tagline:
-        "Ölçeklenebilir web mimarileri (SaaS), masaüstü uygulamaları ve veritabanı yönetimi odaklı çözümler üreten yazılım geliştirici.",
+        "Laravel ve .NET ile web uygulamaları ve multi-tenant SaaS mimarileri, C# ile masaüstü otomasyonlar, Python ile doğal dil işleme projeleri geliştiriyorum. Sağlık, envanter ve restoran yönetimi gibi gerçek iş süreçlerine yönelik çözümleri veritabanı tasarımından yayına kadar uçtan uca hayata geçiriyorum.",
       github: "GitHub",
       linkedin: "LinkedIn",
     },
@@ -200,9 +200,9 @@ export const ui = {
   },
   en: {
     hero: {
-      title: "Software Developer",
+      title: "Computer Engineer",
       tagline:
-        "Software developer focused on scalable web architectures (SaaS), desktop applications, and database management solutions.",
+        "I build web applications and multi-tenant SaaS architectures with Laravel and .NET, desktop automation in C#, and natural language processing projects in Python. I deliver solutions for real-world workflows such as healthcare, inventory and restaurant management end to end, from database design to deployment.",
       github: "GitHub",
       linkedin: "LinkedIn",
     },
